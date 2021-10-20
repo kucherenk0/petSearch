@@ -78,6 +78,8 @@ spring:
         - api-docs
         # Uncomment to activate TLS for the dev profile
         #- tls
+    document:
+      upload-directory: uploaded-content
   jmx:
     enabled: false
   data:

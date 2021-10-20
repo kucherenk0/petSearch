@@ -1,0 +1,29 @@
+{
+  "petsearchApp": {
+    "dog": {
+      "home": {
+        "title": "Dogs",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Dog",
+        "createOrEditLabel": "Создать или отредактировать Dog",
+        "notFound": "Dogs не найдено"
+      },
+      "created": "Новый Dog создан с идентификатором {{ param }}",
+      "updated": "Dog обновлен с идентификатором {{ param }}",
+      "deleted": "Dog удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Dog {{ id }}?"
+      },
+      "detail": {
+        "title": "Dog"
+      },
+      "id": "ID",
+      "color": "Color",
+      "dogBreed": "Dog Breed",
+      "longTail": "Long Tail",
+      "hasLeash": "Has Leash",
+      "coordinates": "Coordinates",
+      "picture": "Picture"
+    }
+  }
+}

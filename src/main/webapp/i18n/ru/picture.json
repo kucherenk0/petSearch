@@ -1,0 +1,31 @@
+{
+  "petsearchApp": {
+    "picture": {
+      "home": {
+        "title": "Pictures",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Picture",
+        "createOrEditLabel": "Создать или отредактировать Picture",
+        "notFound": "Pictures не найдено"
+      },
+      "created": "Новый Picture создан с идентификатором {{ param }}",
+      "updated": "Picture обновлен с идентификатором {{ param }}",
+      "deleted": "Picture удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Picture {{ id }}?"
+      },
+      "detail": {
+        "title": "Picture"
+      },
+      "id": "ID",
+      "externalId": "External Id",
+      "hasDog": "Has Dog",
+      "filePath": "File Path",
+      "streetAddress": "Street Address",
+      "cameraId": "Camera Id",
+      "dateOfShoot": "Date Of Shoot",
+      "dog": "Dog",
+      "user": "User"
+    }
+  }
+}
