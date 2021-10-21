@@ -6,6 +6,7 @@ import { Translate } from 'react-jhipster';
 import { Row, Col, Alert } from 'reactstrap';
 
 import { useAppSelector } from 'app/config/store';
+import UploadFile from 'app/modules/upload-form/upload-file';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -29,6 +30,9 @@ export const Home = () => {
                 You are logged in as user {account.login}.
               </Translate>
             </Alert>
+            <div>
+              <UploadFile></UploadFile>
+            </div>
           </div>
         ) : (
           <div>

@@ -42,6 +42,8 @@
     "devServerPort": 9060,
     "clientPackageManager": "npm",
     "languages": ["en", "ru"],
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "entities": ["Picture", "Dog"],
+    "lastLiquibaseTimestamp": 1634758576000
   }
 }

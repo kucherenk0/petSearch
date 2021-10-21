@@ -1,27 +1,32 @@
 package com.kowechka.petsearch.web.rest;
 
 import com.kowechka.petsearch.domain.Picture;
+import com.kowechka.petsearch.domain.User;
 import com.kowechka.petsearch.repository.PictureRepository;
 import com.kowechka.petsearch.service.PictureService;
+import com.kowechka.petsearch.service.UserService;
 import com.kowechka.petsearch.web.rest.errors.BadRequestAlertException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.apache.commons.compress.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -43,19 +48,26 @@ public class PictureResource {
 
     private final PictureService pictureService;
 
+    private final UserService userService;
+
     private final PictureRepository pictureRepository;
 
-    public PictureResource(PictureService pictureService, PictureRepository pictureRepository) {
+    public PictureResource(PictureService pictureService, UserService userService, PictureRepository pictureRepository) {
         this.pictureService = pictureService;
+        this.userService = userService;
         this.pictureRepository = pictureRepository;
     }
 
     @PostMapping("/uploadPictures")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-        storageService.store(file);
-        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+    public ResponseEntity<Picture> handleFileUpload(@RequestParam("pictureFile") MultipartFile pictureFile) throws Exception {
+        //refactor
+        User user = userService.getUserWithAuthorities().orElseThrow(() -> new Exception("cant get user"));
+        Picture result = pictureService.savePictureAndStoreContent(user, pictureFile);
 
-        return "redirect:/";
+        return ResponseEntity
+            .created(new URI("/api/pictures/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -165,14 +177,25 @@ public class PictureResource {
     /**
      * {@code GET  /pictures/:id} : get the "id" picture.
      *
-     * @param id the id of the picture to retrieve.
+     * @param searchId the id of the picture to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the picture, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/pictures/{id}")
-    public ResponseEntity<Picture> getPicture(@PathVariable Long id) {
-        log.debug("REST request to get Picture : {}", id);
-        Optional<Picture> picture = pictureService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(picture);
+
+    //TODO: exception handling
+    @GetMapping("/pictures/{searchId}")
+    public ResponseEntity<List<Picture>> getPicturesForCurrentSearch(@PathVariable Long searchId) throws Exception {
+        log.debug("REST request to get Picture for search : {}", searchId);
+        User user = userService.getUserWithAuthorities().orElseThrow(() -> new Exception("cant get user"));
+        List<Picture> pictures = pictureService.findAllBySearchId(user, searchId);
+        return ResponseEntity.ok(pictures);
+    }
+
+    //TODO: exception handling
+    @GetMapping("/pictures/content/{id}")
+    public void getPictureContent(HttpServletResponse response, @PathVariable Long id) throws IOException {
+        InputStream in = pictureService.getPictureContentStreamById(id);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        IOUtils.copy(in, response.getOutputStream());
     }
 
     /**
