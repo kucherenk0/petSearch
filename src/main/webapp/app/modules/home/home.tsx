@@ -18,7 +18,8 @@ export const Home = () => {
       </Col>
       <Col md="9">
         <h2>
-          <Translate contentKey="home.title">Lost a pet?, we will try to help you!</Translate>
+          {/* Загляни в папку i18n (home.title  - это путь к тексту)*/}
+          <Translate contentKey="home.title" />
         </h2>
         <p className="lead">
           <Translate contentKey="home.subtitle">This is your homepage</Translate>
@@ -55,6 +56,7 @@ export const Home = () => {
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
               </Link>
             </Alert>
+            <UploadFile />
           </div>
         )}
       </Col>
