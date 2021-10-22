@@ -3,6 +3,8 @@
 // Import Bootstrap source files from node_modules
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import '~bootswatch/dist/flatly/bootswatch';
+@import '~antd/dist/antd.css';
+
 body {
   margin: 0;
 }

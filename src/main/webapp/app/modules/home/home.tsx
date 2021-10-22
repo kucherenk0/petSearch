@@ -7,6 +7,7 @@ import { Row, Col, Alert } from 'reactstrap';
 
 import { useAppSelector } from 'app/config/store';
 import UploadFile from 'app/modules/upload-form/upload-file';
+import { UploadAntd } from 'app/components';
 
 export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -57,6 +58,7 @@ export const Home = () => {
               </Link>
             </Alert>
             <UploadFile />
+            <UploadAntd />
           </div>
         )}
       </Col>
