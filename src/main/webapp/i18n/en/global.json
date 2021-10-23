@@ -9,6 +9,7 @@
         "main": "Entities",
         "picture": "Picture",
         "dog": "Dog",
+        "petSearchEntity": "Pet Search Entity",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

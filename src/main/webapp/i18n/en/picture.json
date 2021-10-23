@@ -25,7 +25,8 @@
       "cameraId": "Camera Id",
       "dateOfShoot": "Date Of Shoot",
       "dog": "Dog",
-      "user": "User"
+      "user": "User",
+      "search": "Search"
     }
   }
 }

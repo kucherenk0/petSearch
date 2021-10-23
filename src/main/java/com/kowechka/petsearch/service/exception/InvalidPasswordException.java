@@ -1,4 +1,4 @@
-package com.kowechka.petsearch.service;
+package com.kowechka.petsearch.service.exception;
 
 public class InvalidPasswordException extends RuntimeException {
 

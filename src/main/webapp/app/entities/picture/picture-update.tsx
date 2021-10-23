@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { IPetSearchEntity } from 'app/shared/model/pet-search-entity.model';
+import { getEntities as getPetSearchEntities } from 'app/entities/pet-search-entity/pet-search-entity.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './picture.reducer';
 import { IPicture } from 'app/shared/model/picture.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -18,6 +20,7 @@ export const PictureUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const users = useAppSelector(state => state.userManagement.users);
+  const petSearchEntities = useAppSelector(state => state.petSearchEntity.entities);
   const pictureEntity = useAppSelector(state => state.picture.entity);
   const loading = useAppSelector(state => state.picture.loading);
   const updating = useAppSelector(state => state.picture.updating);
@@ -35,6 +38,7 @@ export const PictureUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getUsers({}));
+    dispatch(getPetSearchEntities({}));
   }, []);
 
   useEffect(() => {
@@ -48,6 +52,7 @@ export const PictureUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...pictureEntity,
       ...values,
       user: users.find(it => it.id.toString() === values.userId.toString()),
+      search: petSearchEntities.find(it => it.id.toString() === values.searchId.toString()),
     };
 
     if (isNew) {
@@ -63,6 +68,7 @@ export const PictureUpdate = (props: RouteComponentProps<{ id: string }>) => {
       : {
           ...pictureEntity,
           userId: pictureEntity?.user?.id,
+          searchId: pictureEntity?.search?.id,
         };
 
   return (
@@ -143,6 +149,22 @@ export const PictureUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="picture-search"
+                name="searchId"
+                data-cy="search"
+                label={translate('petsearchApp.picture.search')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {petSearchEntities
+                  ? petSearchEntities.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

@@ -15,6 +15,8 @@ import passwordReset from 'app/modules/account/password-reset/password-reset.red
 import picture from 'app/entities/picture/picture.reducer';
 // prettier-ignore
 import dog from 'app/entities/dog/dog.reducer';
+// prettier-ignore
+import petSearchEntity from 'app/entities/pet-search-entity/pet-search-entity.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -30,6 +32,7 @@ const rootReducer = {
   settings,
   picture,
   dog,
+  petSearchEntity,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

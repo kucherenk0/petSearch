@@ -124,6 +124,9 @@ export const Picture = (props: RouteComponentProps<{ url: string }>) => {
                 <th>
                   <Translate contentKey="petsearchApp.picture.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="petsearchApp.picture.search">Search</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -144,6 +147,7 @@ export const Picture = (props: RouteComponentProps<{ url: string }>) => {
                     {picture.dateOfShoot ? <TextFormat type="date" value={picture.dateOfShoot} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
                   <td>{picture.user ? picture.user.id : ''}</td>
+                  <td>{picture.search ? <Link to={`pet-search-entity/${picture.search.id}`}>{picture.search.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${picture.id}`} color="info" size="sm" data-cy="entityDetailsButton">

@@ -43,7 +43,7 @@
     "clientPackageManager": "npm",
     "languages": ["en", "ru"],
     "enableGradleEnterprise": false,
-    "entities": ["Picture", "Dog"],
-    "lastLiquibaseTimestamp": 1634758576000
+    "entities": ["Picture", "Dog", "PetSearchEntity"],
+    "lastLiquibaseTimestamp": 1634850195000
   }
 }

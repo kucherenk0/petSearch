@@ -71,6 +71,10 @@ export const PictureDetail = (props: RouteComponentProps<{ id: string }>) => {
             <Translate contentKey="petsearchApp.picture.user">User</Translate>
           </dt>
           <dd>{pictureEntity.user ? pictureEntity.user.id : ''}</dd>
+          <dt>
+            <Translate contentKey="petsearchApp.picture.search">Search</Translate>
+          </dt>
+          <dd>{pictureEntity.search ? pictureEntity.search.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/picture" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

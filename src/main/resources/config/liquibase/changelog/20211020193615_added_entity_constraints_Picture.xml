@@ -13,5 +13,11 @@
                                  constraintName="fk_picture__user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="search_id"
+                                 baseTableName="picture"
+                                 constraintName="fk_picture__search_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pet_search_entity"/>
     </changeSet>
 </databaseChangeLog>

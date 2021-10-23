@@ -35,7 +35,7 @@ public class Dog implements Serializable {
     private String coordinates;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "dogs", "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "dogs", "user", "search" }, allowSetters = true)
     private Picture picture;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
