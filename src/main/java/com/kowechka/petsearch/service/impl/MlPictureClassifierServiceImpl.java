@@ -26,7 +26,7 @@ public class MlPictureClassifierServiceImpl implements MlPictureClassifierServic
     private final PictureService pictureService;
 
     public static final String PYTHON_SCRIPT_FILE_NAME = "ml/classifier.py";
-    public static final String RESULT_FOLDER_PATH = "ml/results/";
+    public static final String RESULT_FOLDER_PATH = "src/../ml/results/";
     public static final String PYTHON_OUTPUT_STREAM_FILE = "ml/output.txt";
 
     @Override
@@ -91,7 +91,7 @@ public class MlPictureClassifierServiceImpl implements MlPictureClassifierServic
         var resultFilePath = RESULT_FOLDER_PATH + "search-" + searchId + "/pic" + picture.getId() + ".json";
 
         var f = new File(resultFilePath);
-        var matchingFiles = f.listFiles((dir, name) -> name.equals(picture.getId()));
+        var matchingFiles = f.listFiles((dir, name) -> name.equals(picture.getId().toString()));
         return (matchingFiles != null ? matchingFiles.length : 0) != 0;
     }
 }
