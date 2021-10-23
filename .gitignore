@@ -6,6 +6,7 @@
 /src/test/javascript/coverage/
 /file-storage/**
 /ml/**
+/ml/*
 
 
 ######################
