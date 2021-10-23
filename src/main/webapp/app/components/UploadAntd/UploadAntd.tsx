@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Modal, Upload, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -20,6 +21,7 @@ export const UploadAntd: FC = () => {
   };
 
   const [state, setState] = useState(initialState);
+  const [resp, setResp] = useState(null);
 
   const handleCancel = () => setState({ ...state, previewVisible: false });
   const handlePreview = async file => {
@@ -40,16 +42,15 @@ export const UploadAntd: FC = () => {
     // поправь плз)
     formData.append('dateOfLost', '2020-01-01');
     formData.append('address', 'test_addr');
-    formData.append('files', fileList[0]);
+    fileList.forEach(file => {
+      formData.append('files[]', file);
+    });
 
-    fetch('/api/search/form/', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(result => {
-        //      console.log('Success:', result);
+    axios
+      .post('/api/search/form/', {
+        body: formData,
       })
+      .then(response => setResp(response))
       .catch(error => {
         console.error('Error:', error);
       });
@@ -84,6 +85,7 @@ export const UploadAntd: FC = () => {
           Submit
         </Button>
       </div>
+      {resp && <div>{resp.toString()}</div>}
     </>
   );
 };
