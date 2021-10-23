@@ -9,6 +9,7 @@ import com.kowechka.petsearch.IntegrationTest;
 import com.kowechka.petsearch.domain.User;
 import com.kowechka.petsearch.repository.UserRepository;
 import com.kowechka.petsearch.security.AuthoritiesConstants;
+import com.kowechka.petsearch.web.rest.resource.UserResource;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

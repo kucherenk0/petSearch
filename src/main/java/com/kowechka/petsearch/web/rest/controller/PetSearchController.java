@@ -1,4 +1,4 @@
-package com.kowechka.petsearch.web.rest;
+package com.kowechka.petsearch.web.rest.controller;
 
 import com.kowechka.petsearch.service.PetSearchService;
 import com.kowechka.petsearch.service.mapper.PetSearchDtoMapper;

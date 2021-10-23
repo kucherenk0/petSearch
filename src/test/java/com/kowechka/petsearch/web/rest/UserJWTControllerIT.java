@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.kowechka.petsearch.IntegrationTest;
 import com.kowechka.petsearch.domain.User;
 import com.kowechka.petsearch.repository.UserRepository;
+import com.kowechka.petsearch.web.rest.controller.UserJWTController;
 import com.kowechka.petsearch.web.rest.vm.LoginVM;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

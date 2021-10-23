@@ -14,7 +14,7 @@ import com.kowechka.petsearch.security.AuthoritiesConstants;
 import com.kowechka.petsearch.service.UserService;
 import com.kowechka.petsearch.service.dto.AdminUserDTO;
 import com.kowechka.petsearch.service.dto.PasswordChangeDTO;
-import com.kowechka.petsearch.service.dto.UserDTO;
+import com.kowechka.petsearch.web.rest.resource.AccountResource;
 import com.kowechka.petsearch.web.rest.vm.KeyAndPasswordVM;
 import com.kowechka.petsearch.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

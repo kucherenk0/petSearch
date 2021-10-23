@@ -1,4 +1,4 @@
-package com.kowechka.petsearch.web.rest;
+package com.kowechka.petsearch.web.rest.resource;
 
 import com.kowechka.petsearch.config.Constants;
 import com.kowechka.petsearch.domain.User;

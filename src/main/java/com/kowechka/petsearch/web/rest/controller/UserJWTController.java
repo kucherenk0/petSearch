@@ -1,4 +1,4 @@
-package com.kowechka.petsearch.web.rest;
+package com.kowechka.petsearch.web.rest.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kowechka.petsearch.security.jwt.JWTFilter;

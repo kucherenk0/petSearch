@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.kowechka.petsearch.IntegrationTest;
 import com.kowechka.petsearch.domain.Dog;
 import com.kowechka.petsearch.repository.DogRepository;
+import com.kowechka.petsearch.web.rest.resource.DogResource;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
