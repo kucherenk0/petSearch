@@ -30,7 +30,7 @@ export const Home = () => {
               </Translate>
             </Alert>
             <div>
-              <UploadFile></UploadFile>
+              <UploadAntd />
             </div>
           </div>
         ) : (
@@ -54,7 +54,6 @@ export const Home = () => {
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
               </Link>
             </Alert>
-            <UploadFile />
             <UploadAntd />
           </div>
         )}

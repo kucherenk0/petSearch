@@ -47,15 +47,17 @@ export const UploadFile = () => {
   const handleSubmission = () => {
     const formData = new FormData();
     // поправь плз)
-    // formData.append('File', selectedFiles);
+    formData.append('dateOfLost', '2020-01-01');
+    formData.append('address', 'test_addr');
+    formData.append('files', selectedFiles.pop());
 
-    fetch('https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>', {
+    fetch('localhost:8080/api/search/form/', {
       method: 'POST',
       body: formData,
     })
       .then(response => response.json())
       .then(result => {
-        // console.log('Success:', result);
+        //      console.log('Success:', result);
       })
       .catch(error => {
         console.error('Error:', error);

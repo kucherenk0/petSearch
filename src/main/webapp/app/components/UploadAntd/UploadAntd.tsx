@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Modal, Upload } from 'antd';
+import { Modal, Upload, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 function getBase64(file) {
@@ -35,6 +35,26 @@ export const UploadAntd: FC = () => {
     });
   };
 
+  const handleSubmission = () => {
+    const formData = new FormData();
+    // поправь плз)
+    formData.append('dateOfLost', '2020-01-01');
+    formData.append('address', 'test_addr');
+    formData.append('files', fileList[0]);
+
+    fetch('/api/search/form/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(result => {
+        //      console.log('Success:', result);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+
   const handleChange = ({ fileList }) => setState({ ...state, fileList });
 
   const { previewVisible, previewImage, fileList, previewTitle } = state;
@@ -59,6 +79,11 @@ export const UploadAntd: FC = () => {
       <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
+      <div>
+        <Button color="success" type="primary" onClick={handleSubmission}>
+          Submit
+        </Button>
+      </div>
     </>
   );
 };

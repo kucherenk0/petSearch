@@ -42,7 +42,8 @@ public class MlPictureClassifierServiceImpl implements MlPictureClassifierServic
 
     @Override
     public Boolean isCompleted(PetSearchEntity search) {
-        return search.getPictures().stream().allMatch(picture -> isResultPresentForPicture(picture, search.getId().toString()));
+        var pictures = pictureService.findAllByPetSearchId(search.getId());
+        return pictures.stream().allMatch(picture -> isResultPresentForPicture(picture, search.getId().toString()));
     }
 
     @Override
@@ -88,10 +89,9 @@ public class MlPictureClassifierServiceImpl implements MlPictureClassifierServic
     private boolean isResultPresentForPicture(Picture picture, String searchId) {
         log.debug("Checking for result of classification Python process for file with path {} :", picture.getFilePath());
 
-        var resultFilePath = RESULT_FOLDER_PATH + "search-" + searchId + "/pic" + picture.getId() + ".json";
+        var resultFilePath = RESULT_FOLDER_PATH + "search-" + searchId + "/pic-" + picture.getId() + ".json";
 
         var f = new File(resultFilePath);
-        var matchingFiles = f.listFiles((dir, name) -> name.equals(picture.getId().toString()));
-        return (matchingFiles != null ? matchingFiles.length : 0) != 0;
+        return f.exists();
     }
 }

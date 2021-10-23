@@ -101,6 +101,8 @@ public class PetSearchServiceImpl implements PetSearchService {
                 var dto = petSearchDtoMapper.toDto(presentSearch);
                 dto.setPicturesDownloadUrls(mlPictureClassifierService.getClassificationResult(presentSearch));
                 return Optional.of(dto);
+            } else {
+                return Optional.of(petSearchDtoMapper.toDto(requestedSearch.get()));
             }
         }
 
