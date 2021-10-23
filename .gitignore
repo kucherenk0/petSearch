@@ -5,6 +5,9 @@
 /target/classes/static/**
 /src/test/javascript/coverage/
 /file-storage/**
+/ml/results/**
+/ml/output.txt
+
 
 ######################
 # Node
