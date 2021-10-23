@@ -1,0 +1,61 @@
+{
+  "name": "Picture",
+  "fields": [
+    {
+      "fieldName": "externalId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "hasDog",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "filePath",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cameraId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOfShoot",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dog",
+      "otherEntityRelationshipName": "picture",
+      "relationshipName": "dog"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "picture",
+      "relationshipName": "user"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "petSearchEntity",
+      "otherEntityRelationshipName": "picture",
+      "relationshipName": "search"
+    }
+  ],
+  "entityTableName": "picture",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211020193615"
+}

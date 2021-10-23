@@ -1,0 +1,28 @@
+{
+  "petsearchApp": {
+    "petSearchEntity": {
+      "home": {
+        "title": "Pet Search Entities",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Pet Search Entity",
+        "createOrEditLabel": "Создать или отредактировать Pet Search Entity",
+        "notFound": "Pet Search Entities не найдено"
+      },
+      "created": "Новый Pet Search Entity создан с идентификатором {{ param }}",
+      "updated": "Pet Search Entity обновлен с идентификатором {{ param }}",
+      "deleted": "Pet Search Entity удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Pet Search Entity {{ id }}?"
+      },
+      "detail": {
+        "title": "Pet Search Entity"
+      },
+      "id": "ID",
+      "dateOfLost": "Date Of Lost",
+      "status": "Status",
+      "adderss": "Adderss",
+      "picture": "Picture",
+      "user": "User"
+    }
+  }
+}
