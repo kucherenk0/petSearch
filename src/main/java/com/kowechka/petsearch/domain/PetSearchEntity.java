@@ -7,9 +7,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * A PetSearchEntity.
@@ -17,8 +15,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Builder
-@Table(name = "pet_search_entity")
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "pet_search_entity")
 public class PetSearchEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +39,30 @@ public class PetSearchEntity implements Serializable {
     private String adderss;
 
     @OneToMany(mappedBy = "search")
+    @Builder.Default
     @JsonIgnoreProperties(value = { "dogs", "user", "search" }, allowSetters = true)
     private Set<Picture> pictures = new HashSet<>();
 
     @ManyToOne
     private User user;
+
+    @Override
+    public String toString() {
+        return (
+            "PetSearchEntity{" +
+            "id=" +
+            (id == null ? "null" : id) +
+            ", dateOfLost=" +
+            (dateOfLost == null ? "null" : dateOfLost) +
+            ", status=" +
+            (status == null ? "null" : status) +
+            ", adderss='" +
+            (adderss == null ? "null" : adderss) +
+            ", pictures=" +
+            (pictures == null ? "null" : pictures) +
+            ", user=" +
+            (user == null ? "null" : user) +
+            '}'
+        );
+    }
 }

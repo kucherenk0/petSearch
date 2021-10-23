@@ -2,6 +2,7 @@ package com.kowechka.petsearch.service;
 
 import com.kowechka.petsearch.domain.PetSearchEntity;
 import com.kowechka.petsearch.web.rest.dto.CreatePetSearchDto;
+import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
 import java.util.Optional;
 
 public interface PetSearchService {
@@ -9,5 +10,5 @@ public interface PetSearchService {
 
     PetSearchEntity save(PetSearchEntity petSearchEntity);
 
-    Optional<PetSearchEntity> findOne(Long id);
+    Optional<PetSearchDto> findOne(Long id);
 }

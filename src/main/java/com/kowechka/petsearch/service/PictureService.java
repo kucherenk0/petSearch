@@ -1,6 +1,7 @@
 package com.kowechka.petsearch.service;
 
 import com.kowechka.petsearch.domain.Picture;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,8 @@ public interface PictureService {
      * @return the list of entities.
      */
     Page<Picture> findAll(Pageable pageable);
+
+    List<Picture> findAllByPetSearchId(Long searchId);
 
     /**
      * Get the "id" picture.

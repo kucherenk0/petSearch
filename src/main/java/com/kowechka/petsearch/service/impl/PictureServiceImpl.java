@@ -3,7 +3,9 @@ package com.kowechka.petsearch.service.impl;
 import com.kowechka.petsearch.domain.Picture;
 import com.kowechka.petsearch.repository.PictureRepository;
 import com.kowechka.petsearch.service.PictureService;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -68,6 +70,11 @@ public class PictureServiceImpl implements PictureService {
     public Page<Picture> findAll(Pageable pageable) {
         log.debug("Request to get all Pictures");
         return pictureRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Picture> findAllByPetSearchId(Long searchId) {
+        return pictureRepository.findAll().stream().filter(p -> p.getPetSearchId().equals(searchId)).collect(Collectors.toList());
     }
 
     @Override

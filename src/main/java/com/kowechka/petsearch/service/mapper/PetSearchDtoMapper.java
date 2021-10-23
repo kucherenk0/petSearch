@@ -25,7 +25,6 @@ public class PetSearchDtoMapper {
             .status(entity.getStatus())
             .dateOfLost(entity.getDateOfLost())
             .address(entity.getAdderss())
-            .picturesDownloadUrls(entity.getPictures().stream().map(this::getDownloadUrlForPicture).collect(Collectors.toList()))
             .build();
     }
 
