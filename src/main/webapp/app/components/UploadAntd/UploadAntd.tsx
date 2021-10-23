@@ -53,6 +53,7 @@ export const UploadAntd: FC = () => {
       .then(response => setResp(response))
       .catch(error => {
         console.error('Error:', error);
+        setResp(error);
       });
   };
 
@@ -85,7 +86,7 @@ export const UploadAntd: FC = () => {
           Submit
         </Button>
       </div>
-      {resp && <div>{resp.toString()}</div>}
+      {resp && <div style={{ color: 'red', fontSize: 20 }}>{resp.toString()}</div>}
     </>
   );
 };
