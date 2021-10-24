@@ -23,13 +23,13 @@
             <column name="adderss" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="tail" type="bigint">
+            <column name="tail" type="INTEGER">
                 <constraints nullable="true" />
             </column>
-            <column name="radius" type="bigint">
+            <column name="radius" type="INTEGER">
                 <constraints nullable="true" />
             </column>
-            <column name="color" type="bigint">
+            <column name="color" type="INTEGER">
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint">
