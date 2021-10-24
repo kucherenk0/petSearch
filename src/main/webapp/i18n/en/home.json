@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Lost your best friend? Don't care, we will help you anytime and anywhere!!",
-    "subtitle": "This is your homepage",
+    "title": "PetSearch",
+    "subtitle": "Lost your best friend? Don't care, we will help you anytime and anywhere!!",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
