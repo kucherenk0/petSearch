@@ -10,7 +10,7 @@ export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
 
   return (
-    <Row style={{ justifyContent: 'center' }}>
+    <Row style={{ justifyContent: 'center', height: '100%' }}>
       <Col md="10">
         <h1>
           {/* Загляни в папку i18n (home.title  - это путь к тексту)*/}
