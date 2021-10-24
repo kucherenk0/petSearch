@@ -8,5 +8,5 @@ public class ClassificationResultDto {
 
     String filePath;
     String dateOfShoot;
-    String photoAddress;
+    String latLong;
 }

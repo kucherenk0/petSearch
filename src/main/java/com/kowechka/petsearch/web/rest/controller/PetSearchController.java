@@ -26,7 +26,9 @@ public class PetSearchController {
 
     @PostMapping("/")
     public ResponseEntity<PetSearchDto> create(@RequestBody CreatePetSearchDto dto) {
-        return ResponseEntity.ok(petSearchDtoMapper.toDto(petSearchService.createEntityAndRunSearch(dto)));
+        return ResponseEntity.ok(
+            petSearchDtoMapper.toDto(petSearchService.createEntityAndRunSearch(dto))
+        );
     }
 
     @PostMapping("/form")
@@ -38,7 +40,7 @@ public class PetSearchController {
         @RequestParam("tail") int tail,
         @RequestParam("radius") int radius
     ) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(dateOfLost, formatter);
         var dto = CreatePetSearchDto
             .builder()
@@ -49,7 +51,9 @@ public class PetSearchController {
             .color(color)
             .tail(tail)
             .build();
-        return ResponseEntity.ok(petSearchDtoMapper.toDto(petSearchService.createEntityAndRunSearch(dto)));
+        return ResponseEntity.ok(
+            petSearchDtoMapper.toDto(petSearchService.createEntityAndRunSearch(dto))
+        );
     }
 
     @GetMapping("{id}")

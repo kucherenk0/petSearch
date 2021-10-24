@@ -7,9 +7,13 @@ import java.util.List;
 public interface MlPictureClassifierService {
     void sendSearchToClassification(PetSearchEntity search);
 
+    void sendPictureToClassification(String path);
+
     Boolean isCompleted(PetSearchEntity search);
 
     List<ClassificationResultDto> getClassificationResult(PetSearchEntity search);
 
-    List<ClassificationResultDto> getClassificationResultForPictures(PetSearchEntity search);
+    List<ClassificationResultDto> getClassificationResultForPictures(
+        PetSearchEntity search
+    );
 }

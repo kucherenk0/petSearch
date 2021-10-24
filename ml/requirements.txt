@@ -1,0 +1,11 @@
+opencv-python
+PyYAML
+numpy
+scikit-learn
+pandas
+matplotlib
+Pillow
+tqdm
+google-cloud-vision 
+oogle-cloud-translate 
+google-cloud-texttospeech 
