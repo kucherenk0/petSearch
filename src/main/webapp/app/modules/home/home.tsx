@@ -24,14 +24,7 @@ export const Home = () => {
         </p>
         {account && account.login ? (
           <div>
-            <Alert color="success">
-              <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>
-                You are logged in as user {account.login}.
-              </Translate>
-            </Alert>
-            <div>
-              <UploadAntd />
-            </div>
+            <UploadAntd />
           </div>
         ) : (
           <div>

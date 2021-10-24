@@ -27,22 +27,6 @@ export const UploadAntd: FC = () => {
     fileList: [],
   };
 
-  interface IPetSearch {
-    id?: string;
-    dateOfLost?: string | null;
-    address?: string | null;
-    picturesDownloadUrls?: [] | null;
-    status?: string | null;
-  }
-
-  let petSearchState: IPetSearch = {
-    id: null,
-    dateOfLost: null,
-    address: null,
-    picturesDownloadUrls: null,
-    status: null,
-  };
-
   const [state, setState] = useState(initialState);
   const [resp, setResp] = useState(null);
 
