@@ -8,7 +8,7 @@ searchId = sys.argv[1]
 photoId = sys.argv[2]
 photoPath = sys.argv[3]
 
-resultFolderName = 'ml/results/search-' + searchId
+resultFolderName = '/ml/results/search-' + searchId
 
 print("exists: " + str(os.path.isdir(resultFolderName)))
 if not os.path.isdir(resultFolderName):

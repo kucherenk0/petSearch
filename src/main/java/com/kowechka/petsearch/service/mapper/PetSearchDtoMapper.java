@@ -22,6 +22,9 @@ public class PetSearchDtoMapper {
         return PetSearchDto
             .builder()
             .id(entity.getId())
+            .color(entity.getColor())
+            .radius(entity.getRadius())
+            .tail(entity.getTail())
             .status(entity.getStatus())
             .dateOfLost(entity.getDateOfLost())
             .address(entity.getAdderss())

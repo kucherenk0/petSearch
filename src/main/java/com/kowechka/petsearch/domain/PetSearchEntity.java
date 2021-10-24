@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kowechka.petsearch.domain.enumeration.SearchStatus;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class PetSearchEntity implements Serializable {
     private Long id;
 
     @Column(name = "date_of_lost")
-    private LocalDate dateOfLost;
+    private LocalDateTime dateOfLost;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -38,10 +39,18 @@ public class PetSearchEntity implements Serializable {
     @Column(name = "adderss")
     private String adderss;
 
+    @Column(name = "color")
+    private int color;
+
+    @Column(name = "tail")
+    private int tail;
+
+    @Column(name = "radius")
+    private int radius;
+
     @OneToMany(mappedBy = "search")
-    @Builder.Default
     @JsonIgnoreProperties(value = { "dogs", "user", "search" }, allowSetters = true)
-    private Set<Picture> pictures = new HashSet<>();
+    private Set<Picture> pictures;
 
     @ManyToOne
     private User user;

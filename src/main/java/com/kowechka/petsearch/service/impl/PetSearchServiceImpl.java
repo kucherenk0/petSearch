@@ -10,6 +10,7 @@ import com.kowechka.petsearch.service.exception.CantGetCurrentUserException;
 import com.kowechka.petsearch.service.mapper.PetSearchDtoMapper;
 import com.kowechka.petsearch.web.rest.dto.CreatePetSearchDto;
 import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,9 @@ public class PetSearchServiceImpl implements PetSearchService {
             .status(SearchStatus.PENDING)
             .dateOfLost(dto.getDateOfLost())
             .adderss(dto.getAddress())
+            .color(dto.getColor())
+            .radius(dto.getRadius())
+            .tail(dto.getTail())
             .user(currentUser)
             .build();
 
@@ -51,23 +55,24 @@ public class PetSearchServiceImpl implements PetSearchService {
 
         //TODO: refactor to async uploading
 
-        var uploadedPictures = dto
-            .getFilesToUpload()
-            .stream()
-            .map(file ->
-                pictureService.save(
-                    Picture
-                        .builder()
-                        .petSearchId(saved.getId())
-                        .externalId(USER_UPLOAD_EXTERNAL_ID)
-                        .filePath(fileStorageService.upload(file))
-                        .user(currentUser)
-                        .build()
-                )
-            )
-            .collect(Collectors.toSet());
-
-        saved.setPictures(uploadedPictures);
+        //        var uploadedPictures = new HashSet<Picture>();
+        //            dto
+        //            .getFilesToUpload()
+        //            .stream()
+        //            .map(file ->
+        //                pictureService.save(
+        //                    Picture
+        //                        .builder()
+        //                        .petSearchId(saved.getId())
+        //                        .externalId(USER_UPLOAD_EXTERNAL_ID)
+        //                        .filePath(fileStorageService.upload(file))
+        //                        .user(currentUser)
+        //                        .build()
+        //                )
+        //            )
+        //            .collect(Collectors.toSet());
+        //
+        //        saved.setPictures(uploadedPictures);
 
         // aka async call
         mlPictureClassifierService.sendSearchToClassification(saved);

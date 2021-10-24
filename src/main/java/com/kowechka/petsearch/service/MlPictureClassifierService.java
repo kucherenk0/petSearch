@@ -10,4 +10,6 @@ public interface MlPictureClassifierService {
     Boolean isCompleted(PetSearchEntity search);
 
     List<ClassificationResultDto> getClassificationResult(PetSearchEntity search);
+
+    List<ClassificationResultDto> getClassificationResultForPictures(PetSearchEntity search);
 }

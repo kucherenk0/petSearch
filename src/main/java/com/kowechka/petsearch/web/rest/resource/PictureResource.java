@@ -2,10 +2,12 @@ package com.kowechka.petsearch.web.rest.resource;
 
 import com.kowechka.petsearch.domain.Picture;
 import com.kowechka.petsearch.repository.PictureRepository;
+import com.kowechka.petsearch.service.FileStorageService;
 import com.kowechka.petsearch.service.PictureService;
 import com.kowechka.petsearch.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -42,9 +45,18 @@ public class PictureResource {
 
     private final PictureRepository pictureRepository;
 
-    public PictureResource(PictureService pictureService, PictureRepository pictureRepository) {
+    private final FileStorageService fileStorageService;
+
+    public PictureResource(PictureService pictureService, PictureRepository pictureRepository, FileStorageService fileStorageService) {
         this.pictureService = pictureService;
         this.pictureRepository = pictureRepository;
+        this.fileStorageService = fileStorageService;
+    }
+
+    @PostMapping("/files/upload")
+    public ResponseEntity<Void> createPetSearchWithForm(@RequestParam("files") MultipartFile[] files) {
+        Arrays.stream(files).forEach(fileStorageService::upload);
+        return ResponseEntity.ok().build();
     }
 
     /**

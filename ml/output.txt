@@ -1,1 +1,4 @@
-This message will be written to the screen.
+Traceback (most recent call last):
+  File "ml/classifier.py", line 8, in <module>
+    photoId = sys.argv[2]
+IndexError: list index out of range
