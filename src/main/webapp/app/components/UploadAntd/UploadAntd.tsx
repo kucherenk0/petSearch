@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
-import { Modal, Upload, Button } from 'antd';
+import { Modal, Upload, Button, Image } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { Storage } from 'react-jhipster';
 import axios from 'axios';
 
 function getBase64(file) {
@@ -12,6 +13,12 @@ function getBase64(file) {
   });
 }
 
+const Status = {
+  PENDING: Symbol('PENDING'),
+  IN_PROGRESS: Symbol('IN_PROGRESS'),
+  DONE: Symbol('DONE'),
+};
+
 export const UploadAntd: FC = () => {
   const initialState = {
     previewVisible: false,
@@ -20,8 +27,27 @@ export const UploadAntd: FC = () => {
     fileList: [],
   };
 
+  interface IPetSearch {
+    id?: string;
+    dateOfLost?: string | null;
+    address?: string | null;
+    picturesDownloadUrls?: [] | null;
+    status?: string | null;
+  }
+
+  let petSearchState: IPetSearch = {
+    id: null,
+    dateOfLost: null,
+    address: null,
+    picturesDownloadUrls: null,
+    status: null,
+  };
+
   const [state, setState] = useState(initialState);
   const [resp, setResp] = useState(null);
+
+  const token = Storage.local.get('jhi-authenticationToken') || Storage.session.get('jhi-authenticationToken');
+  const _headers = { 'Content-Type': 'multipart/form-data; charset=utf-8', Authorization: `Bearer ${token}` };
 
   const handleCancel = () => setState({ ...state, previewVisible: false });
   const handlePreview = async file => {
@@ -43,16 +69,23 @@ export const UploadAntd: FC = () => {
     formData.append('dateOfLost', '2020-01-01');
     formData.append('address', 'test_addr');
     fileList.forEach(file => {
-      formData.append('files[]', file);
+      formData.append('files[]', new Blob([file]), 'filename');
     });
 
-    axios
-      .post('/api/search/form/', {
-        body: formData,
+    axios({
+      method: 'post',
+      url: '/api/search/form',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then(response => {
+        setResp(response);
       })
-      .then(response => setResp(response))
       .catch(error => {
-        console.error('Error:', error);
+        //  console.error('Error:', error);
         setResp(error);
       });
   };
@@ -69,13 +102,7 @@ export const UploadAntd: FC = () => {
 
   return (
     <>
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
+      <Upload listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
