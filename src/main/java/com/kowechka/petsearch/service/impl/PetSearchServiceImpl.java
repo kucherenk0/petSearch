@@ -10,16 +10,13 @@ import com.kowechka.petsearch.service.exception.CantGetCurrentUserException;
 import com.kowechka.petsearch.service.mapper.PetSearchDtoMapper;
 import com.kowechka.petsearch.web.rest.dto.CreatePetSearchDto;
 import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.jhipster.web.util.ResponseUtil;
 
 @Service
 @AllArgsConstructor
@@ -99,7 +96,7 @@ public class PetSearchServiceImpl implements PetSearchService {
             if (mlPictureClassifierService.isCompleted(presentSearch)) {
                 presentSearch.setStatus(SearchStatus.DONE);
                 var dto = petSearchDtoMapper.toDto(presentSearch);
-                dto.setPicturesDownloadUrls(mlPictureClassifierService.getClassificationResult(presentSearch));
+                dto.setClassificationResult(mlPictureClassifierService.getClassificationResult(presentSearch));
                 return Optional.of(dto);
             } else {
                 return Optional.of(petSearchDtoMapper.toDto(requestedSearch.get()));

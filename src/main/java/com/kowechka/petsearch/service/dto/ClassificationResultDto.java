@@ -1,10 +1,12 @@
 package com.kowechka.petsearch.service.dto;
 
-import java.util.List;
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data
 public class ClassificationResultDto {
 
-    List<String> filePaths;
+    String filePath;
+    String dateOfShoot;
+    String photoAddress;
 }

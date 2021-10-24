@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -47,27 +48,33 @@ public class MlPictureClassifierServiceImpl implements MlPictureClassifierServic
     }
 
     @Override
-    public List<String> getClassificationResult(PetSearchEntity search) {
+    public List<ClassificationResultDto> getClassificationResult(PetSearchEntity search) {
         if (!isCompleted(search)) {
             throw new MlServiceException("Result is not ready for search with id" + search.getId(), null);
         }
         //TODO: change to formatting
         var folderPath = RESULT_FOLDER_PATH + "search-" + search.getId() + "/";
         var pictures = pictureService.findAllByPetSearchId(search.getId());
-        var result = new ArrayList<String>();
+        var result = new ArrayList<ClassificationResultDto>();
         pictures.forEach(p -> {
             var resultFile = new File(folderPath + "/pic-" + p.getId() + ".json");
             try {
-                var json = new String(Files.readAllBytes(resultFile.toPath()));
-                ObjectMapper objectMapper = new ObjectMapper();
-                ClassificationResultDto classificationResultDto = objectMapper.readValue(json, ClassificationResultDto.class);
-                result.addAll(classificationResultDto.getFilePaths());
+                result.addAll(getClassificationResultDto(resultFile));
             } catch (IOException e) {
                 throw new MlServiceException("Can't read from file " + resultFile.getPath(), e);
             }
         });
 
         return result;
+    }
+
+    private List<ClassificationResultDto> getClassificationResultDto(File resultFile) throws IOException {
+        var json = new String(Files.readAllBytes(resultFile.toPath()));
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ClassificationResultDto[] dtos = objectMapper.readValue(json, ClassificationResultDto[].class);
+
+        return Arrays.asList(dtos);
     }
 
     private void executePythonScriptWithParameters(String searchId, String pictureId, String fileName) {
