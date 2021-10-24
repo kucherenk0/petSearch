@@ -13,7 +13,7 @@ const SearchDog: FC<IProps> = props => {
   return (
     <div className={'containerDog'}>
       {results.length > 0 ? (
-        results.map(item => <DogResultCard key={item.filePath} {...item} />)
+        results.map((item, i) => <DogResultCard key={i} {...item} />)
       ) : (
         <h3>No dogs found</h3>
       )}

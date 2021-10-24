@@ -19,7 +19,7 @@ export const Home = () => {
         <p className="lead">
           <Translate contentKey="home.subtitle">This is your homepage</Translate>
         </p>
-        {account && account.login ? (
+        {!(account && account.login) ? (
           <UploadAntd />
         ) : (
           <div>
