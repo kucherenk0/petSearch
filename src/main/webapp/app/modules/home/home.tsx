@@ -10,41 +10,47 @@ export const Home = () => {
   const account = useAppSelector(state => state.authentication.account);
 
   return (
-    <Row>
-      <Col md="3" className="pad">
-        <span className="hipster rounded" />
-      </Col>
-      <Col md="9">
-        <h2>
+    <Row style={{ justifyContent: 'center', height: '100%' }}>
+      <Col md="10">
+        <h1>
           {/* Загляни в папку i18n (home.title  - это путь к тексту)*/}
           <Translate contentKey="home.title" />
-        </h2>
+        </h1>
         <p className="lead">
           <Translate contentKey="home.subtitle">This is your homepage</Translate>
         </p>
         {account && account.login ? (
-          <div>
-            <UploadAntd />
-          </div>
+          <UploadAntd />
         ) : (
           <div>
             <Alert color="warning">
-              <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
+              <Translate contentKey="global.messages.info.authenticated.prefix">
+                If you want to{' '}
+              </Translate>
 
               <Link to="/login" className="alert-link">
-                <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
+                <Translate contentKey="global.messages.info.authenticated.link">
+                  {' '}
+                  sign in
+                </Translate>
               </Link>
               <Translate contentKey="global.messages.info.authenticated.suffix">
                 , you can try the default accounts:
-                <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
+                <br />- Administrator (login=&quot;admin&quot; and
+                password=&quot;admin&quot;)
                 <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
               </Translate>
             </Alert>
 
             <Alert color="warning">
-              <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
+              <Translate contentKey="global.messages.info.register.noaccount">
+                You do not have an account yet?
+              </Translate>
+              &nbsp;
               <Link to="/account/register" className="alert-link">
-                <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
+                <Translate contentKey="global.messages.info.register.link">
+                  Register a new account
+                </Translate>
               </Link>
             </Alert>
           </div>

@@ -139,5 +139,5 @@
       "not.image": "Файл должен был быть изображением, но было установлено, что \"{{ fileType }}\""
     }
   },
-  "footer": "Это ваш футтер"
+  "footer": "Designed by Vlad Kolesnikov"
 }

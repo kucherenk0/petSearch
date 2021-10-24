@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
-import { Modal, Upload, Button, Image } from 'antd';
+import { Modal, Upload, Button, Image, Cascader } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { Storage } from 'react-jhipster';
 import axios from 'axios';
+import SearchDog from '../SearchDog/SearchDog';
+import { MOCK_SUCCES, optionsColor, optionsTail } from './mock';
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -24,9 +25,6 @@ export const UploadAntd: FC = () => {
   const [state, setState] = useState(initialState);
   const [resp, setResp] = useState(null);
 
-  const token = Storage.local.get('jhi-authenticationToken') || Storage.session.get('jhi-authenticationToken');
-  const _headers = { 'Content-Type': 'multipart/form-data; charset=utf-8', Authorization: `Bearer ${token}` };
-
   const handleCancel = () => setState({ ...state, previewVisible: false });
   const handlePreview = async file => {
     if (!file.url && !file.preview) {
@@ -43,7 +41,6 @@ export const UploadAntd: FC = () => {
 
   const handleSubmission = () => {
     const formData = new FormData();
-    // поправь плз)
     formData.append('dateOfLost', '2020-01-01');
     formData.append('address', 'test_addr');
     fileList.forEach(file => {
@@ -63,12 +60,19 @@ export const UploadAntd: FC = () => {
         setResp(response);
       })
       .catch(error => {
-        //  console.error('Error:', error);
         setResp(error);
       });
   };
 
-  const handleChange = ({ fileList }) => setState({ ...state, fileList });
+  const updateState = data => {
+    setState({ ...state, ...data });
+  };
+
+  const handleChangeCascade = value => {
+    updateState({ tail: value });
+  };
+
+  const handleChangeFile = ({ fileList }) => setState({ ...state, fileList });
 
   const { previewVisible, previewImage, fileList, previewTitle } = state;
   const uploadButton = (
@@ -78,20 +82,49 @@ export const UploadAntd: FC = () => {
     </div>
   );
 
-  return (
+  const LoadDogPhoto = () => (
     <>
-      <Upload listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
-        {fileList.length >= 8 ? null : uploadButton}
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        onPreview={handlePreview}
+        onChange={handleChangeFile}
+      >
+        {fileList.length >= 10 ? null : uploadButton}
       </Upload>
-      <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+      <Modal
+        visible={previewVisible}
+        title={previewTitle}
+        footer={null}
+        onCancel={handleCancel}
+      >
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
+    </>
+  );
+
+  return (
+    <>
+      <Cascader
+        placeholder={'Выберите цвет'}
+        options={optionsColor}
+        onChange={handleChangeCascade}
+        style={{ marginBottom: 30 }}
+      />
+      <Cascader
+        placeholder={'Выберите хвост'}
+        options={optionsTail}
+        onChange={handleChangeCascade}
+        style={{ marginBottom: 30, marginLeft: 20 }}
+      />
+      <LoadDogPhoto />
       <div>
         <Button color="success" type="primary" onClick={handleSubmission}>
           Submit
         </Button>
       </div>
       {resp && <div style={{ color: 'red', fontSize: 20 }}>{resp.toString()}</div>}
+      <SearchDog results={MOCK_SUCCES.classificationResult} />
     </>
   );
 };
