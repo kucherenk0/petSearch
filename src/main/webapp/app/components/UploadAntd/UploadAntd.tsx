@@ -13,12 +13,6 @@ function getBase64(file) {
   });
 }
 
-const Status = {
-  PENDING: Symbol('PENDING'),
-  IN_PROGRESS: Symbol('IN_PROGRESS'),
-  DONE: Symbol('DONE'),
-};
-
 export const UploadAntd: FC = () => {
   const initialState = {
     previewVisible: false,

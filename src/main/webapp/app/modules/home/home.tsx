@@ -47,7 +47,6 @@ export const Home = () => {
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
               </Link>
             </Alert>
-            <UploadAntd />
           </div>
         )}
       </Col>
