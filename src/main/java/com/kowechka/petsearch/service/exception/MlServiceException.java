@@ -7,4 +7,8 @@ public class MlServiceException extends RuntimeException {
     public MlServiceException(String message, Exception cause) {
         super(message, cause);
     }
+
+    public MlServiceException(String message) {
+        super(message);
+    }
 }

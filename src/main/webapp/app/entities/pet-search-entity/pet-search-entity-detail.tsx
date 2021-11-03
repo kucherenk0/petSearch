@@ -20,7 +20,9 @@ export const PetSearchEntityDetail = (props: RouteComponentProps<{ id: string }>
     <Row>
       <Col md="8">
         <h2 data-cy="petSearchEntityDetailsHeading">
-          <Translate contentKey="petsearchApp.petSearchEntity.detail.title">PetSearchEntity</Translate>
+          <Translate contentKey="petsearchApp.petSearchEntity.detail.title">
+            PetSearchEntity
+          </Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -31,39 +33,60 @@ export const PetSearchEntityDetail = (props: RouteComponentProps<{ id: string }>
           <dd>{petSearchEntityEntity.id}</dd>
           <dt>
             <span id="dateOfLost">
-              <Translate contentKey="petsearchApp.petSearchEntity.dateOfLost">Date Of Lost</Translate>
+              <Translate contentKey="petsearchApp.petSearchEntity.dateOfLost">
+                Date Of Lost
+              </Translate>
             </span>
           </dt>
           <dd>
             {petSearchEntityEntity.dateOfLost ? (
-              <TextFormat value={petSearchEntityEntity.dateOfLost} type="date" format={APP_LOCAL_DATE_FORMAT} />
+              <TextFormat
+                value={petSearchEntityEntity.dateOfLost}
+                type="date"
+                format={APP_LOCAL_DATE_FORMAT}
+              />
             ) : null}
           </dd>
           <dt>
             <span id="status">
-              <Translate contentKey="petsearchApp.petSearchEntity.status">Status</Translate>
+              <Translate contentKey="petsearchApp.petSearchEntity.status">
+                Status
+              </Translate>
             </span>
           </dt>
           <dd>{petSearchEntityEntity.status}</dd>
           <dt>
-            <span id="adderss">
-              <Translate contentKey="petsearchApp.petSearchEntity.adderss">Adderss</Translate>
+            <span id="address">
+              <Translate contentKey="petsearchApp.petSearchEntity.address">
+                Address
+              </Translate>
             </span>
           </dt>
-          <dd>{petSearchEntityEntity.adderss}</dd>
+          <dd>{petSearchEntityEntity.address}</dd>
           <dt>
             <Translate contentKey="petsearchApp.petSearchEntity.user">User</Translate>
           </dt>
           <dd>{petSearchEntityEntity.user ? petSearchEntityEntity.user.id : ''}</dd>
         </dl>
-        <Button tag={Link} to="/pet-search-entity" replace color="info" data-cy="entityDetailsBackButton">
+        <Button
+          tag={Link}
+          to="/pet-search-entity"
+          replace
+          color="info"
+          data-cy="entityDetailsBackButton"
+        >
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.back">Back</Translate>
           </span>
         </Button>
         &nbsp;
-        <Button tag={Link} to={`/pet-search-entity/${petSearchEntityEntity.id}/edit`} replace color="primary">
+        <Button
+          tag={Link}
+          to={`/pet-search-entity/${petSearchEntityEntity.id}/edit`}
+          replace
+          color="primary"
+        >
           <FontAwesomeIcon icon="pencil-alt" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.edit">Edit</Translate>

@@ -1,16 +1,19 @@
 package com.kowechka.petsearch.service.impl;
 
 import com.kowechka.petsearch.domain.PetSearchEntity;
-import com.kowechka.petsearch.domain.Picture;
+import com.kowechka.petsearch.domain.PictureEntity;
 import com.kowechka.petsearch.domain.User;
 import com.kowechka.petsearch.domain.enumeration.SearchStatus;
 import com.kowechka.petsearch.repository.PetSearchEntityRepository;
 import com.kowechka.petsearch.service.*;
+import com.kowechka.petsearch.service.client.MlServiceClient;
+import com.kowechka.petsearch.service.dto.MlServiceSearchResultDto;
 import com.kowechka.petsearch.service.exception.CantGetCurrentUserException;
 import com.kowechka.petsearch.service.mapper.PetSearchDtoMapper;
 import com.kowechka.petsearch.web.rest.dto.CreatePetSearchDto;
 import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
-import java.util.HashSet;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -24,27 +27,29 @@ import org.springframework.transaction.annotation.Transactional;
 public class PetSearchServiceImpl implements PetSearchService {
 
     private final Logger log = LoggerFactory.getLogger(PetSearchServiceImpl.class);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+        "dd/MM/yyyy-HH:mm:ss"
+    );
 
-    public static final String USER_UPLOAD_EXTERNAL_ID = "user_upload";
-
-    private final FileStorageService fileStorageService;
     private final PetSearchEntityRepository petSearchEntityRepository;
     private final UserService userService;
-    private final PictureService pictureService;
-    private final MlPictureClassifierService mlPictureClassifierService;
+    private final MlServiceClient mlServiceClient;
     private final PetSearchDtoMapper petSearchDtoMapper;
+    private final PictureEntityService pictureEntityService;
 
     @Override
-    public PetSearchEntity createEntityAndRunSearch(CreatePetSearchDto dto) {
+    public PetSearchDto createEntityAndRunSearch(CreatePetSearchDto dto) {
         log.debug("Request to create new Search with PetSearchEntity : {}", dto);
 
-        User currentUser = userService.getUserWithAuthorities().orElseThrow(CantGetCurrentUserException::new);
+        User currentUser = userService
+            .getUserWithAuthorities()
+            .orElseThrow(CantGetCurrentUserException::new);
 
         PetSearchEntity pending = PetSearchEntity
             .builder()
             .status(SearchStatus.PENDING)
             .dateOfLost(dto.getDateOfLost())
-            .adderss(dto.getAddress())
+            .address(dto.getAddress())
             .color(dto.getColor())
             .radius(dto.getRadius())
             .tail(dto.getTail())
@@ -53,33 +58,21 @@ public class PetSearchServiceImpl implements PetSearchService {
 
         PetSearchEntity saved = save(pending);
 
-        //TODO: refactor to async uploading
+        List<Long> resultPictureIds = mlServiceClient.getSearchResult(saved);
 
-        //        var uploadedPictures = new HashSet<Picture>();
-        //            dto
-        //            .getFilesToUpload()
-        //            .stream()
-        //            .map(file ->
-        //                pictureService.save(
-        //                    Picture
-        //                        .builder()
-        //                        .petSearchId(saved.getId())
-        //                        .externalId(USER_UPLOAD_EXTERNAL_ID)
-        //                        .filePath(fileStorageService.upload(file))
-        //                        .user(currentUser)
-        //                        .build()
-        //                )
-        //            )
-        //            .collect(Collectors.toSet());
-        //
-        //        saved.setPictures(uploadedPictures);
+        saved.setStatus(SearchStatus.DONE);
+        save(saved);
 
-        // aka async call
-        mlPictureClassifierService.sendSearchToClassification(saved);
+        PetSearchDto result = petSearchDtoMapper.toDto(saved);
 
-        saved.setStatus(SearchStatus.IN_PROGRESS);
+        result.setResult(
+            resultPictureIds
+                .stream()
+                .map(this::getMlServiceSearchResultDto)
+                .collect(Collectors.toList())
+        );
 
-        return save(saved);
+        return result;
     }
 
     @Transactional
@@ -94,20 +87,22 @@ public class PetSearchServiceImpl implements PetSearchService {
     @Transactional(readOnly = true)
     public Optional<PetSearchDto> findOne(Long id) {
         log.debug("Request to get PetSearchEntity with id : {}", id);
-
         var requestedSearch = petSearchEntityRepository.findById(id);
-        if (requestedSearch.isPresent()) {
-            var presentSearch = requestedSearch.get();
-            if (mlPictureClassifierService.isCompleted(presentSearch)) {
-                presentSearch.setStatus(SearchStatus.DONE);
-                var dto = petSearchDtoMapper.toDto(presentSearch);
-                dto.setClassificationResult(mlPictureClassifierService.getClassificationResult(presentSearch));
-                return Optional.of(dto);
-            } else {
-                return Optional.of(petSearchDtoMapper.toDto(requestedSearch.get()));
-            }
-        }
+        return requestedSearch.map(petSearchDtoMapper::toDto);
+    }
 
-        return Optional.empty();
+    private MlServiceSearchResultDto getMlServiceSearchResultDto(Long id) {
+        PictureEntity picture = pictureEntityService
+            .findOne(id)
+            .orElseThrow(() ->
+                new RuntimeException("Cant' find picture with id " + id.toString())
+            );
+
+        return MlServiceSearchResultDto
+            .builder()
+            .dateOfShoot(picture.getDate().format(formatter))
+            .downloadUrl(picture.getDownloadUrl())
+            .latLong(picture.getLat() + ", " + picture.getLon())
+            .build();
     }
 }

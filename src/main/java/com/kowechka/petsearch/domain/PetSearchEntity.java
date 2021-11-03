@@ -36,8 +36,8 @@ public class PetSearchEntity implements Serializable {
     @Column(name = "status")
     private SearchStatus status;
 
-    @Column(name = "adderss")
-    private String adderss;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "color")
     private int color;
@@ -48,30 +48,6 @@ public class PetSearchEntity implements Serializable {
     @Column(name = "radius")
     private int radius;
 
-    @OneToMany(mappedBy = "search")
-    @JsonIgnoreProperties(value = { "dogs", "user", "search" }, allowSetters = true)
-    private Set<Picture> pictures;
-
     @ManyToOne
     private User user;
-
-    @Override
-    public String toString() {
-        return (
-            "PetSearchEntity{" +
-            "id=" +
-            (id == null ? "null" : id) +
-            ", dateOfLost=" +
-            (dateOfLost == null ? "null" : dateOfLost) +
-            ", status=" +
-            (status == null ? "null" : status) +
-            ", adderss='" +
-            (adderss == null ? "null" : adderss) +
-            ", pictures=" +
-            (pictures == null ? "null" : pictures) +
-            ", user=" +
-            (user == null ? "null" : user) +
-            '}'
-        );
-    }
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity PictureEntity.
+    -->
+    <changeSet id="20211103213700-1" author="kucherenko-av">
+        <createTable tableName="picture">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="download_url" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="processed" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="has_dog" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="has_animal" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="has_owner" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="tail" type="INTEGER">
+                <constraints nullable="true" />
+            </column>
+            <column name="color" type="INTEGER">
+                <constraints nullable="true" />
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="lat" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="lon" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="camera_uid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date" type="DATETIME">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20211103213700-1-data" author="kucherenko-av">
+        <loadData
+            file="config/liquibase/data/picture.csv"
+            separator=";"
+            tableName="picture"
+            usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="download_url" type="string"/>
+            <column name="processed" type="boolean"/>
+            <column name="has_dog" type="boolean"/>
+            <column name="has_animal" type="boolean"/>
+            <column name="has_owner" type="boolean"/>
+            <column name="tail" type="numeric"/>
+            <column name="color" type="numeric"/>
+            <column name="address" type="string"/>
+            <column name="lat" type="string"/>
+            <column name="lon" type="string"/>
+            <column name="camera_uid" type="string"/>
+            <column name="date" type="date"/>
+            <column name="user_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

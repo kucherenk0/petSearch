@@ -1,12 +1,13 @@
 package com.kowechka.petsearch.service.dto;
 
-import java.time.LocalDate;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class ClassificationResultDto {
+@Builder
+public class MlServiceSearchResultDto {
 
-    String filePath;
+    String downloadUrl;
     String dateOfShoot;
     String latLong;
 }

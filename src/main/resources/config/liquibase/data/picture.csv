@@ -1,0 +1,9 @@
+id;download_url;processed;has_dog;has_animal;has_owner;color;tail;address;lat;lon;camera_uid;date;user_id
+1;https://storage.yandexcloud.net/psstorage/B54.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+2;https://storage.yandexcloud.net/psstorage/123.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+3;https://storage.yandexcloud.net/psstorage/124.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+4;https://storage.yandexcloud.net/psstorage/125.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+5;https://storage.yandexcloud.net/psstorage/126.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+6;https://storage.yandexcloud.net/psstorage/127.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+7;https://storage.yandexcloud.net/psstorage/128.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1
+8;https://storage.yandexcloud.net/psstorage/129.jpg;true;true;true;false;2;1;Москва,ПроспектМира128к3;55.819172;37.640728;test_cam_uid;2021-10-19 22:22:11;1

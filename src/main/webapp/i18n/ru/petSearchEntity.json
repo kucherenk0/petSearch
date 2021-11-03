@@ -20,7 +20,7 @@
       "id": "ID",
       "dateOfLost": "Date Of Lost",
       "status": "Status",
-      "adderss": "Adderss",
+      "address": "Address",
       "picture": "Picture",
       "user": "User"
     }

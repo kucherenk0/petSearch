@@ -20,7 +20,7 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="adderss" type="varchar(255)">
+            <column name="address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="tail" type="INTEGER">
@@ -58,7 +58,7 @@
             <column name="id" type="numeric"/>
             <column name="date_of_lost" type="date"/>
             <column name="status" type="string"/>
-            <column name="adderss" type="string"/>
+            <column name="address" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

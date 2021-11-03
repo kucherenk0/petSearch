@@ -1,7 +1,7 @@
 package com.kowechka.petsearch.service;
 
 import com.kowechka.petsearch.domain.PetSearchEntity;
-import com.kowechka.petsearch.service.dto.ClassificationResultDto;
+import com.kowechka.petsearch.service.dto.MlServiceSearchResultDto;
 import java.util.List;
 
 public interface MlPictureClassifierService {
@@ -11,9 +11,9 @@ public interface MlPictureClassifierService {
 
     Boolean isCompleted(PetSearchEntity search);
 
-    List<ClassificationResultDto> getClassificationResult(PetSearchEntity search);
+    List<MlServiceSearchResultDto> getClassificationResult(PetSearchEntity search);
 
-    List<ClassificationResultDto> getClassificationResultForPictures(
+    List<MlServiceSearchResultDto> getClassificationResultForPictures(
         PetSearchEntity search
     );
 }

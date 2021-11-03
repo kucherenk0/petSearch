@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import {
+  Translate,
+  TextFormat,
+  getSortState,
+  JhiPagination,
+  JhiItemCount,
+} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntities } from './pet-search-entity.reducer';
@@ -15,7 +21,10 @@ export const PetSearchEntity = (props: RouteComponentProps<{ url: string }>) => 
   const dispatch = useAppDispatch();
 
   const [paginationState, setPaginationState] = useState(
-    overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'id'), props.location.search)
+    overridePaginationStateWithQueryParams(
+      getSortState(props.location, ITEMS_PER_PAGE, 'id'),
+      props.location.search
+    )
   );
 
   const petSearchEntityList = useAppSelector(state => state.petSearchEntity.entities);
@@ -82,16 +91,32 @@ export const PetSearchEntity = (props: RouteComponentProps<{ url: string }>) => 
   return (
     <div>
       <h2 id="pet-search-entity-heading" data-cy="PetSearchEntityHeading">
-        <Translate contentKey="petsearchApp.petSearchEntity.home.title">Pet Search Entities</Translate>
+        <Translate contentKey="petsearchApp.petSearchEntity.home.title">
+          Pet Search Entities
+        </Translate>
         <div className="d-flex justify-content-end">
-          <Button className="mr-2" color="info" onClick={handleSyncList} disabled={loading}>
+          <Button
+            className="mr-2"
+            color="info"
+            onClick={handleSyncList}
+            disabled={loading}
+          >
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="petsearchApp.petSearchEntity.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="petsearchApp.petSearchEntity.home.refreshListLabel">
+              Refresh List
+            </Translate>
           </Button>
-          <Link to={`${match.url}/new`} className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link
+            to={`${match.url}/new`}
+            className="btn btn-primary jh-create-entity"
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+          >
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="petsearchApp.petSearchEntity.home.createLabel">Create new Pet Search Entity</Translate>
+            <Translate contentKey="petsearchApp.petSearchEntity.home.createLabel">
+              Create new Pet Search Entity
+            </Translate>
           </Link>
         </div>
       </h2>
@@ -101,19 +126,32 @@ export const PetSearchEntity = (props: RouteComponentProps<{ url: string }>) => 
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="petsearchApp.petSearchEntity.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="petsearchApp.petSearchEntity.id">ID</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('dateOfLost')}>
-                  <Translate contentKey="petsearchApp.petSearchEntity.dateOfLost">Date Of Lost</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="petsearchApp.petSearchEntity.dateOfLost">
+                    Date Of Lost
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('status')}>
-                  <Translate contentKey="petsearchApp.petSearchEntity.status">Status</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="petsearchApp.petSearchEntity.status">
+                    Status
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('adderss')}>
-                  <Translate contentKey="petsearchApp.petSearchEntity.adderss">Adderss</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('address')}>
+                  <Translate contentKey="petsearchApp.petSearchEntity.address">
+                    address
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="petsearchApp.petSearchEntity.user">User</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="petsearchApp.petSearchEntity.user">
+                    User
+                  </Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -122,23 +160,40 @@ export const PetSearchEntity = (props: RouteComponentProps<{ url: string }>) => 
               {petSearchEntityList.map((petSearchEntity, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
-                    <Button tag={Link} to={`${match.url}/${petSearchEntity.id}`} color="link" size="sm">
+                    <Button
+                      tag={Link}
+                      to={`${match.url}/${petSearchEntity.id}`}
+                      color="link"
+                      size="sm"
+                    >
                       {petSearchEntity.id}
                     </Button>
                   </td>
                   <td>
                     {petSearchEntity.dateOfLost ? (
-                      <TextFormat type="date" value={petSearchEntity.dateOfLost} format={APP_LOCAL_DATE_FORMAT} />
+                      <TextFormat
+                        type="date"
+                        value={petSearchEntity.dateOfLost}
+                        format={APP_LOCAL_DATE_FORMAT}
+                      />
                     ) : null}
                   </td>
                   <td>
-                    <Translate contentKey={`petsearchApp.SearchStatus.${petSearchEntity.status}`} />
+                    <Translate
+                      contentKey={`petsearchApp.SearchStatus.${petSearchEntity.status}`}
+                    />
                   </td>
-                  <td>{petSearchEntity.adderss}</td>
+                  <td>{petSearchEntity.address}</td>
                   <td>{petSearchEntity.user ? petSearchEntity.user.id : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${petSearchEntity.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button
+                        tag={Link}
+                        to={`${match.url}/${petSearchEntity.id}`}
+                        color="info"
+                        size="sm"
+                        data-cy="entityDetailsButton"
+                      >
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
@@ -177,15 +232,26 @@ export const PetSearchEntity = (props: RouteComponentProps<{ url: string }>) => 
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="petsearchApp.petSearchEntity.home.notFound">No Pet Search Entities found</Translate>
+              <Translate contentKey="petsearchApp.petSearchEntity.home.notFound">
+                No Pet Search Entities found
+              </Translate>
             </div>
           )
         )}
       </div>
       {totalItems ? (
-        <div className={petSearchEntityList && petSearchEntityList.length > 0 ? '' : 'd-none'}>
+        <div
+          className={
+            petSearchEntityList && petSearchEntityList.length > 0 ? '' : 'd-none'
+          }
+        >
           <Row className="justify-content-center">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
+            <JhiItemCount
+              page={paginationState.activePage}
+              total={totalItems}
+              itemsPerPage={paginationState.itemsPerPage}
+              i18nEnabled
+            />
           </Row>
           <Row className="justify-content-center">
             <JhiPagination

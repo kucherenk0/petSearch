@@ -11,7 +11,7 @@
       "fieldValues": "PENGING,IN_PROGRESS,DONE"
     },
     {
-      "fieldName": "adderss",
+      "fieldName": "address",
       "fieldType": "String"
     }
   ],

@@ -7,7 +7,7 @@ export interface IPetSearchEntity {
   id?: number;
   dateOfLost?: string | null;
   status?: SearchStatus | null;
-  adderss?: string | null;
+  address?: string | null;
   pictures?: IPicture[] | null;
   user?: IUser | null;
 }

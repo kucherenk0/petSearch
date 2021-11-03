@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import {
+  isNumber,
+  Translate,
+  translate,
+  ValidatedField,
+  ValidatedForm,
+} from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './pet-search-entity.reducer';
+import {
+  getEntity,
+  updateEntity,
+  createEntity,
+  reset,
+} from './pet-search-entity.reducer';
 import { IPetSearchEntity } from 'app/shared/model/pet-search-entity.model';
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
+import {
+  convertDateTimeFromServer,
+  convertDateTimeToServer,
+  displayDefaultDateTime,
+} from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
@@ -70,8 +85,13 @@ export const PetSearchEntityUpdate = (props: RouteComponentProps<{ id: string }>
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="petsearchApp.petSearchEntity.home.createOrEditLabel" data-cy="PetSearchEntityCreateUpdateHeading">
-            <Translate contentKey="petsearchApp.petSearchEntity.home.createOrEditLabel">Create or edit a PetSearchEntity</Translate>
+          <h2
+            id="petsearchApp.petSearchEntity.home.createOrEditLabel"
+            data-cy="PetSearchEntityCreateUpdateHeading"
+          >
+            <Translate contentKey="petsearchApp.petSearchEntity.home.createOrEditLabel">
+              Create or edit a PetSearchEntity
+            </Translate>
           </h2>
         </Col>
       </Row>
@@ -105,15 +125,21 @@ export const PetSearchEntityUpdate = (props: RouteComponentProps<{ id: string }>
                 data-cy="status"
                 type="select"
               >
-                <option value="PENGING">{translate('petsearchApp.SearchStatus.PENGING')}</option>
-                <option value="IN_PROGRESS">{translate('petsearchApp.SearchStatus.IN_PROGRESS')}</option>
-                <option value="DONE">{translate('petsearchApp.SearchStatus.DONE')}</option>
+                <option value="PENGING">
+                  {translate('petsearchApp.SearchStatus.PENGING')}
+                </option>
+                <option value="IN_PROGRESS">
+                  {translate('petsearchApp.SearchStatus.IN_PROGRESS')}
+                </option>
+                <option value="DONE">
+                  {translate('petsearchApp.SearchStatus.DONE')}
+                </option>
               </ValidatedField>
               <ValidatedField
-                label={translate('petsearchApp.petSearchEntity.adderss')}
-                id="pet-search-entity-adderss"
-                name="adderss"
-                data-cy="adderss"
+                label={translate('petsearchApp.petSearchEntity.address')}
+                id="pet-search-entity-address"
+                name="address"
+                data-cy="address"
                 type="text"
               />
               <ValidatedField
@@ -132,7 +158,14 @@ export const PetSearchEntityUpdate = (props: RouteComponentProps<{ id: string }>
                     ))
                   : null}
               </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/pet-search-entity" replace color="info">
+              <Button
+                tag={Link}
+                id="cancel-save"
+                data-cy="entityCreateCancelButton"
+                to="/pet-search-entity"
+                replace
+                color="info"
+              >
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">
@@ -140,7 +173,13 @@ export const PetSearchEntityUpdate = (props: RouteComponentProps<{ id: string }>
                 </span>
               </Button>
               &nbsp;
-              <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
+              <Button
+                color="primary"
+                id="save-entity"
+                data-cy="entityCreateSaveButton"
+                type="submit"
+                disabled={updating}
+              >
                 <FontAwesomeIcon icon="save" />
                 &nbsp;
                 <Translate contentKey="entity.action.save">Save</Translate>

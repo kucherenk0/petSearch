@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   petsearch-app:
-    image: petsearch
+    image: cr.yandex/crptcdeq7jmqo5kg26ng/petsearch
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
@@ -18,12 +18,12 @@ services:
     ports:
       - 127.0.0.1:8080:8080
   petsearch-postgresql:
-    image: postgres:13.4
+    image: cr.yandex/crptcdeq7jmqo5kg26ng/postgres
     # volumes:
     #   - ~/volumes/jhipster/petsearch/postgresql/:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=petsearch
-      - POSTGRES_PASSWORD=
+      - POSTGRES_PASSWORD=12345
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix

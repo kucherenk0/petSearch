@@ -1,9 +1,8 @@
 package com.kowechka.petsearch.web.rest.dto;
 
 import com.kowechka.petsearch.domain.enumeration.SearchStatus;
-import com.kowechka.petsearch.service.dto.ClassificationResultDto;
+import com.kowechka.petsearch.service.dto.MlServiceSearchResultDto;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
@@ -18,7 +17,7 @@ public class PetSearchDto implements Serializable {
     private Long id;
     private LocalDateTime dateOfLost;
     private String address;
-    private List<ClassificationResultDto> classificationResult;
+    private List<MlServiceSearchResultDto> result;
     private SearchStatus status;
     private int color;
     private int tail;

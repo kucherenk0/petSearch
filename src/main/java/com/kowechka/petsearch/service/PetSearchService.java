@@ -6,7 +6,7 @@ import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
 import java.util.Optional;
 
 public interface PetSearchService {
-    PetSearchEntity createEntityAndRunSearch(CreatePetSearchDto dto);
+    PetSearchDto createEntityAndRunSearch(CreatePetSearchDto dto);
 
     PetSearchEntity save(PetSearchEntity petSearchEntity);
 
