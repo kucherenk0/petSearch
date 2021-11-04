@@ -1,2 +1,2 @@
 export * from './UploadAntd/UploadAntd';
-export * from './upload-form/upload-file';
+export * from './legacy/upload-form/upload-file';

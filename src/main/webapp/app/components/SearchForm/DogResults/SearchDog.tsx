@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import './styles.scss';
 import { TDogResult } from './types';
-import DogResultCard from 'app/components/SearchDog/DogResultCard/DogResultCard';
+import DogResultCard from './DogResultCard/DogResultCard';
 
 interface IProps {
   results: TDogResult[];
 }
 
-const SearchDog: FC<IProps> = props => {
+const DogResults: FC<IProps> = props => {
   const { results } = props;
 
   return (
@@ -21,4 +21,4 @@ const SearchDog: FC<IProps> = props => {
   );
 };
 
-export default SearchDog;
+export default DogResults;

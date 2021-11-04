@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { Button, Card, Image, Modal } from 'antd';
+import React, { FC } from 'react';
+import { Button, Card, Image, Modal, Popover } from 'antd';
 import { TDogResult } from '../types';
 import './styles.scss';
 import { Map, Placemark, YMaps } from 'react-yandex-maps';
@@ -29,10 +29,21 @@ const DogResultCard: FC<TDogResult> = props => {
 
   return (
     <Card title={dateOfShoot} className={'cardDog'}>
-      <p>
-        <Button onClick={showMap}>{photoAddress}</Button>
+      <p style={{ height: 60 }}>
+        <Popover content={photoAddress}>
+          <Button onClick={showMap} className={'cardDogAddress'}>
+            <div className={'cardDogAddressText'}>{photoAddress}</div>
+          </Button>
+        </Popover>
       </p>
-      <Image width={200} src={filePath} className={'imageDog'} />
+      <div className={'cardDogImgContainer'}>
+        <Image
+          alt={photoAddress}
+          width={200}
+          src={filePath}
+          className={'cardDogImageDog'}
+        />
+      </div>
     </Card>
   );
 };
