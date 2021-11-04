@@ -53,13 +53,16 @@
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="pictures_uploading_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
 
     <changeSet id="20211103213700-1-data" author="kucherenko-av">
         <loadData
-            file="config/liquibase/data/picture.csv"
+            file="config/liquibase/data/pictures_prod.csv"
             separator=";"
             tableName="picture"
             usePreparedStatements="true">

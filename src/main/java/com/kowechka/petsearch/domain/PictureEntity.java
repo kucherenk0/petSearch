@@ -1,5 +1,6 @@
 package com.kowechka.petsearch.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
@@ -21,8 +22,8 @@ public class PictureEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "picture_pk_sequence")
+    @SequenceGenerator(name = "picture_pk_sequence", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
@@ -62,6 +63,11 @@ public class PictureEntity implements Serializable {
 
     @Column(name = "date")
     private LocalDateTime date;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "pictures", "user" }, allowSetters = true)
+    private PicturesUploading picturesUploading;
 
     @ManyToOne
     private User user;

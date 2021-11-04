@@ -17,9 +17,12 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211103213700_added_entity_PictureEntity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211021210315_added_entity_PetSearchEntity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104001800_added_entity_PicturesUploading.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20211021210315_added_entity_constraints_PictureEntity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211021210315_added_entity_constraints_PetSearchEntity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211021210315_added_entity_constraints_PicturesUploading.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104204300_added_sequence_picture_pk_sequence.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
