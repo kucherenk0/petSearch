@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface MlServiceClient {
     List<Long> getSearchResult(PetSearchEntity search);
+
+    void sendPicturesToProcessing(List<Long> ids);
 }

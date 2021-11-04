@@ -1,12 +1,12 @@
 package com.kowechka.petsearch.web.rest.controller;
 
-import com.kowechka.petsearch.service.PetSearchService;
-import com.kowechka.petsearch.web.rest.dto.CreatePetSearchDto;
-import com.kowechka.petsearch.web.rest.dto.PetSearchDto;
+import com.kowechka.petsearch.service.PicturesUploadingService;
+import com.kowechka.petsearch.web.rest.dto.PicturesUploadingDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tech.jhipster.web.util.ResponseUtil;
 
 @AllArgsConstructor
@@ -15,15 +15,21 @@ import tech.jhipster.web.util.ResponseUtil;
 @Slf4j
 public class PhotoUploadController {
 
-    private final PetSearchService petSearchService;
+    private final PicturesUploadingService picturesUploadingService;
 
-    @PostMapping("/search/dto")
-    public ResponseEntity<PetSearchDto> create(@RequestBody CreatePetSearchDto dto) {
-        return ResponseEntity.ok(petSearchService.createEntityAndRunSearch(dto));
+    @PostMapping("/pictures/upload")
+    public ResponseEntity<PicturesUploadingDto> uploadPictures(
+        @RequestParam("files") MultipartFile[] files
+    ) {
+        return ResponseEntity.ok(
+            picturesUploadingService.uploadFilesAndCreatePictures(files)
+        );
     }
 
-    @GetMapping("/search/{id}")
-    public ResponseEntity<PetSearchDto> get(@PathVariable("id") Long id) {
-        return ResponseUtil.wrapOrNotFound(petSearchService.findOne(id));
+    @GetMapping("/pictures/upload/{id}")
+    public ResponseEntity<PicturesUploadingDto> get(@PathVariable("id") Long id) {
+        return ResponseUtil.wrapOrNotFound(
+            picturesUploadingService.findOneAndMapToDto(id)
+        );
     }
 }

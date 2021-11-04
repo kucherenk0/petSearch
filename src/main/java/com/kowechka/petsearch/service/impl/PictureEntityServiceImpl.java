@@ -3,6 +3,9 @@ package com.kowechka.petsearch.service.impl;
 import com.kowechka.petsearch.domain.PictureEntity;
 import com.kowechka.petsearch.repository.PictureEntityRepository;
 import com.kowechka.petsearch.service.PictureEntityService;
+import com.kowechka.petsearch.web.rest.dto.PictureDto;
+import com.kowechka.petsearch.web.rest.dto.PicturesUploadingDto;
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -84,5 +88,30 @@ public class PictureEntityServiceImpl implements PictureEntityService {
     public void delete(Long id) {
         log.debug("Request to delete Picture : {}", id);
         pictureEntityRepository.deleteById(id);
+    }
+
+    @Override
+    public PictureDto toDto(PictureEntity picture) {
+        return PictureDto
+            .builder()
+            .id(picture.getId())
+            .downloadUrl(picture.getDownloadUrl())
+            .hasDog(picture.getHasDog())
+            .hasAnimal(picture.getHasAnimal())
+            .hasOwner(picture.getHasOwner())
+            .color(picture.getColor())
+            .tail(picture.getTail())
+            .address(picture.getAddress())
+            .lat(picture.getLat())
+            .lon(picture.getLon())
+            .cameraUid(picture.getCameraUid())
+            .date(picture.getDate())
+            .build();
+    }
+
+    @Override
+    public List<PictureEntity> findAllByUploadingId(Long id) {
+        log.debug("Request to get all Pictures by uploading id: {}", id);
+        return pictureEntityRepository.findAllByPicturesUploadingId(id);
     }
 }
