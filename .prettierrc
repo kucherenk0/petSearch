@@ -2,8 +2,8 @@
 
 printWidth: 90
 singleQuote: true
-tabWidth: 2
-useTabs: false
+tabWidth: 4
+useTabs: true
 
 # js and ts rules:
 arrowParens: avoid

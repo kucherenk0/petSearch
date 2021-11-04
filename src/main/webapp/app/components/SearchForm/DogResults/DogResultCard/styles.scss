@@ -1,34 +1,36 @@
 .cardDog {
-  width: 250px;
-  margin-right: 10px;
-  margin-top: 10px;
+	width: 250px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	box-shadow: 0px 0.850136px 8.50136px rgba(0, 0, 0, 0.07);
 }
 
 .cardDogAddress {
-  width: 200px;
-  height: auto;
+	width: 200px;
+	height: auto;
 }
 
 .cardDogAddressText {
-  width: 170px;
-  white-space: pre-line;
-  max-height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	width: 170px;
+	white-space: pre-line;
+	max-height: 50px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .cardDogImgContainer {
-  height: 200px;
-  width: 200px;
-  background: #8c8c8c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  overflow: hidden;
+	height: 200px;
+	width: 200px;
+	background: #dcdcdc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
 .cardDogImageDog {
-  width: 100%;
-  height: auto;
+	width: 100%;
+	height: auto;
 }
