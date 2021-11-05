@@ -8,6 +8,7 @@ import DogResults from './DogResults/SearchDog';
 import { MOCK_SUCCES } from './mock';
 import SearchOutlined from '@ant-design/icons/lib/icons/SearchOutlined';
 import { TDogResult } from 'app/components/SearchForm/DogResults/types';
+import ButtonAntd from 'app/components/UI/ButtonAntd/ButtonAntd';
 
 const SearchForm: FC = props => {
 	const initialState: ISearchParams = {
@@ -74,14 +75,14 @@ const SearchForm: FC = props => {
 					options={optionsTail}
 					onChange={handleSetField('tail')}
 				/>
-				<Button
+				<ButtonAntd
 					type={'primary'}
 					className={'petSearchButton'}
 					icon={<SearchOutlined />}
 					onClick={handleSearch}
 				>
 					Найти
-				</Button>
+				</ButtonAntd>
 			</div>
 			<DogResults isLoading={isLoading} results={results} />
 		</main>

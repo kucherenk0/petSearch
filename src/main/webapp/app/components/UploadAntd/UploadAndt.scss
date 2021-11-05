@@ -1,0 +1,10 @@
+.uploadPhotoDog {
+	.ant-upload-list-picture-card-container,
+	.ant-upload-select-picture-card {
+		height: 150px;
+		width: 150px;
+	}
+	& .ant-upload-list-item-error {
+		border-color: #0d5aa7;
+	}
+}

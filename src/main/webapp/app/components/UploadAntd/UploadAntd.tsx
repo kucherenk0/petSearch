@@ -1,90 +1,88 @@
 import React, { FC, useState } from 'react';
 import { Button, Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { addPhotoToDB } from 'app/core/api';
+import './UploadAndt.scss';
+import ButtonAntd from 'app/components/UI/ButtonAntd/ButtonAntd';
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
+interface IProps {
+	handleSubmit: (files: File[]) => void;
 }
 
-export const UploadAntd: FC = () => {
-  const initialState = {
-    previewVisible: false,
-    previewImage: '',
-    previewTitle: '',
-    fileList: [],
-  };
+function getBase64(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = error => reject(error);
+	});
+}
 
-  const [error, setError] = useState(null);
-  const [state, setState] = useState(initialState);
-  const [resp, setResp] = useState(null);
+export const UploadAntd: FC<IProps> = React.memo(props => {
+	const { handleSubmit } = props;
+	const initialState = {
+		previewVisible: false,
+		previewImage: '',
+		previewTitle: '',
+		fileList: [],
+	};
 
-  const handleCancel = () => setState({ ...state, previewVisible: false });
-  const handlePreview = async file => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
+	const [state, setState] = useState(initialState);
+	let timer;
 
-    setState({
-      ...state,
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-      previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-    });
-  };
+	const handleCancel = () => setState({ ...state, previewVisible: false });
+	const handlePreview = async file => {
+		if (!file.url && !file.preview) {
+			file.preview = await getBase64(file.originFileObj);
+		}
 
-  const handleSubmission = () => {
-    addPhotoToDB(fileList).then(res => {
-      res.data && setResp(res.data);
-      res.err && setError(res.err);
-    });
-  };
+		setState({
+			...state,
+			previewImage: file.url || file.preview,
+			previewVisible: true,
+			previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+		});
+	};
 
-  const handleChangeFile = ({ fileList }) => setState({ ...state, fileList });
+	const handleChangeFile = ({ fileList }) => {
+		setState({ ...state, fileList });
+	};
 
-  const { previewVisible, previewImage, fileList, previewTitle } = state;
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
+	const { previewVisible, previewImage, fileList, previewTitle } = state;
+	const uploadButton = (
+		<div>
+			<PlusOutlined />
+			<div style={{ marginTop: 8 }}>Upload</div>
+		</div>
+	);
 
-  const LoadDogPhoto = () => (
-    <>
-      <Upload
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChangeFile}
-      >
-        {fileList.length >= 8 ? null : uploadButton}
-      </Upload>
-      <Modal
-        visible={previewVisible}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-      </Modal>
-    </>
-  );
-
-  return (
-    <>
-      <LoadDogPhoto />
-      <div>
-        <Button color="success" type="primary" onClick={handleSubmission}>
-          Submit
-        </Button>
-      </div>
-      {resp && <div style={{ color: 'red', fontSize: 20 }}>{resp.toString()}</div>}
-    </>
-  );
-};
+	return (
+		<>
+			<Upload
+				className={'uploadPhotoDog'}
+				listType="picture-card"
+				fileList={fileList}
+				onPreview={handlePreview}
+				onChange={handleChangeFile}
+			>
+				{fileList.length >= 20 ? null : uploadButton}
+			</Upload>
+			<Modal
+				visible={previewVisible}
+				title={previewTitle}
+				footer={null}
+				onCancel={handleCancel}
+			>
+				<img alt="example" style={{ width: '100%' }} src={previewImage} />
+			</Modal>
+			<div style={{ width: 150 }}>
+				<ButtonAntd
+					color="success"
+					type="primary"
+					onClick={() => handleSubmit(fileList as File[])}
+				>
+					Submit
+				</ButtonAntd>
+			</div>
+		</>
+	);
+});

@@ -1,0 +1,11 @@
+.photoListContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-grow: 0;
+	width: fit-content;
+}
+
+.photoListLoader {
+	margin-top: 20px;
+}

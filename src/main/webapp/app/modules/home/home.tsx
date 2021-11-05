@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import { Alert, Col, Row } from 'reactstrap';
 import { useAppSelector } from 'app/config/store';
-import { UploadAntd, UploadFile } from 'app/components';
 import './home.scss';
 import SearchForm from 'app/components/SearchForm/SearchForm';
-import { PageContainer } from 'app/components/UI';
+import PhotoForm from 'app/components/PhotoForm/PhotoForm';
 
 export const Home = () => {
 	const account = useAppSelector(state => state.authentication.account);
@@ -29,7 +28,7 @@ export const Home = () => {
 						<>
 							<SearchForm />
 							<br />
-							<UploadAntd />
+							<PhotoForm />
 						</>
 					) : (
 						<div>
