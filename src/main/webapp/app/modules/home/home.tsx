@@ -24,7 +24,7 @@ export const Home = () => {
 				</p>
 				{
 					// TODO
-					account && account.login ? (
+					!(account && account.login) ? (
 						<>
 							<SearchForm />
 							<br />

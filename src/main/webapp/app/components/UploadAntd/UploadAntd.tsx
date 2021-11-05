@@ -3,9 +3,12 @@ import { Button, Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import './UploadAndt.scss';
 import ButtonAntd from 'app/components/UI/ButtonAntd/ButtonAntd';
+import Spin from 'antd/lib/spin';
+import { message } from 'antd/es';
 
 interface IProps {
 	handleSubmit: (files: File[]) => void;
+	loading?: boolean;
 }
 
 function getBase64(file) {
@@ -18,7 +21,7 @@ function getBase64(file) {
 }
 
 export const UploadAntd: FC<IProps> = React.memo(props => {
-	const { handleSubmit } = props;
+	const { handleSubmit, loading } = props;
 	const initialState = {
 		previewVisible: false,
 		previewImage: '',
@@ -47,8 +50,13 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 		setState({ ...state, fileList });
 	};
 
-	const handleClear = () => {
-		setState(initialState);
+	const onSubmit = () => {
+		if (fileList.length > 0) {
+			handleSubmit(fileList);
+		} else {
+			message.warn('You need to download photos', 7);
+		}
+		// setState(initialState);
 	};
 
 	const { previewVisible, previewImage, fileList, previewTitle } = state;
@@ -60,36 +68,35 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 	);
 
 	return (
-		<>
-			<Upload
-				className={'uploadPhotoDog'}
-				listType="picture-card"
-				fileList={fileList}
-				onPreview={handlePreview}
-				onChange={handleChangeFile}
-			>
-				{fileList.length >= 20 ? null : uploadButton}
-			</Upload>
-			<Modal
-				visible={previewVisible}
-				title={previewTitle}
-				footer={null}
-				onCancel={handleCancel}
-			>
-				<img alt="example" style={{ width: '100%' }} src={previewImage} />
-			</Modal>
-			<div style={{ width: 300, display: 'flex', flexDirection: 'row' }}>
-				<ButtonAntd
-					color="success"
-					type="primary"
-					onClick={() => handleSubmit(fileList as File[])}
+		<div className={'uploadPhotoContainer'}>
+			<div>
+				<Upload
+					className={'uploadPhotoDog'}
+					listType="picture-card"
+					fileList={fileList}
+					onPreview={handlePreview}
+					onChange={handleChangeFile}
 				>
-					Submit
-				</ButtonAntd>
-				<ButtonAntd color="success" type="primary" onClick={handleClear}>
-					Clear
-				</ButtonAntd>
+					{fileList.length >= 20 ? null : uploadButton}
+				</Upload>
+				<Modal
+					visible={previewVisible}
+					title={previewTitle}
+					footer={null}
+					onCancel={handleCancel}
+				>
+					<img alt="example" style={{ width: '100%' }} src={previewImage} />
+				</Modal>
 			</div>
-		</>
+			<ButtonAntd
+				color="success"
+				type="primary"
+				onClick={onSubmit}
+				disabled={loading}
+				style={{ width: 200 }}
+			>
+				{loading ? <Spin className={'dogSpin'} /> : 'Submit'}
+			</ButtonAntd>
+		</div>
 	);
 });

@@ -46,7 +46,10 @@ const PhotoForm: FC = props => {
 		if (resp && resp.id) {
 			loadPhotoById(resp.id).then(res => {
 				if (res.data) handleSetResData(res.data);
-				if (res.err) setError(res.err);
+				if (res.err) {
+					setError(res.err);
+					setLoading(false);
+				}
 			});
 		}
 	};
@@ -55,14 +58,16 @@ const PhotoForm: FC = props => {
 		setLoading(true);
 		addPhotoToDB(fileList).then(res => {
 			if (res.data) handleSetResData(res.data);
-			res.err && setError(res.err);
+			if (res.err) {
+				setError(res.err);
+				setLoading(false);
+			}
 		});
 	};
 
 	return (
 		<div className={'photoListContainer'}>
-			<UploadAntd handleSubmit={handleSubmission} />
-			<br />
+			<UploadAntd handleSubmit={handleSubmission} loading={loading} />
 			{Boolean(photos.length) && (
 				<List
 					itemLayout="horizontal"
@@ -74,7 +79,6 @@ const PhotoForm: FC = props => {
 					)}
 				/>
 			)}
-			{loading && <Spin size={'large'} className={'photoListLoader'} />}
 		</div>
 	);
 };

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from 'app/core/constants';
+import { message } from 'antd';
 
 export enum DogColors {
 	DEFAULT = 0,
@@ -65,6 +66,23 @@ export interface IUploadPhoto {
 	result: IUploadPhotoResultItem[];
 }
 
+export const readFiles = files => {
+	return Promise.all(
+		[...files].map(fileEntry => {
+			const reader = new FileReader();
+			reader.readAsArrayBuffer(fileEntry);
+			return new Promise((resolve, reject) => {
+				reader.onload = () => {
+					resolve(reader.result);
+				};
+				reader.onerror = error => {
+					reject(error);
+				};
+			});
+		})
+	);
+};
+
 export const searchByParams = async (
 	params: ISearchParams
 ): Promise<IApiResponse<ISearchResponse>> => {
@@ -75,10 +93,11 @@ export const searchByParams = async (
 		});
 	} catch (e) {
 		console.log('API ERROR', e);
+		message.error(`API ERROR ${e?.message ?? e}`);
 		err = e;
 	}
 	return {
-		data: res.data,
+		data: res?.data,
 		err,
 	};
 };
@@ -89,10 +108,11 @@ export const searchById = async (id: number): Promise<IApiResponse<ISearchRespon
 		res = await axios.get(`${API_URL}/api/search/${id}`);
 	} catch (e) {
 		console.log('API ERROR', e);
+		message.error(`API ERROR ${e?.message ?? e}`);
 		err = e;
 	}
 	return {
-		data: res.data,
+		data: res?.data,
 		err,
 	};
 };
@@ -101,9 +121,10 @@ export const addPhotoToDB = async (
 	photos: File[]
 ): Promise<IApiResponse<IUploadPhoto>> => {
 	const formData = new FormData();
+	const prep = photos.map((item: any): File => item.originFileObj ?? item);
 	let res, err;
-	photos.forEach(file => {
-		formData.append('files', new Blob([file]), 'filename');
+	prep.forEach(file => {
+		formData.append('files', file);
 	});
 	try {
 		res = await axios({
@@ -117,10 +138,11 @@ export const addPhotoToDB = async (
 		});
 	} catch (e) {
 		console.log('API ERROR', e);
+		message.error(`API ERROR ${e?.message ?? e}`, 10);
 		err = e;
 	}
 	return {
-		data: res.data,
+		data: res?.data,
 		err,
 	};
 };
@@ -131,10 +153,11 @@ export const loadPhotoById = async (id: number): Promise<IApiResponse<IUploadPho
 		res = await axios.get(`/api/pictures/upload/${id}`);
 	} catch (e) {
 		console.log('API ERROR', e);
+		message.error(`API ERROR ${e?.message ?? e}`);
 		err = e;
 	}
 	return {
-		data: res.data,
+		data: res?.data,
 		err,
 	};
 };

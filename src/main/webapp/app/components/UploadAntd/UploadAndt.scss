@@ -8,3 +8,11 @@
 		border-color: #0d5aa7;
 	}
 }
+
+.dogSpin {
+	margin-top: 5px;
+	color: white;
+	& .ant-spin-dot-item {
+		background-color: white;
+	}
+}

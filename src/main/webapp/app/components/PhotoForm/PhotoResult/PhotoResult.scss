@@ -22,9 +22,13 @@
 	width: 60px;
 	background-color: #c2c2c2;
 	border-radius: 8px;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
 	overflow: hidden;
 	& > img {
-		width: 100%;
-		height: auto;
+		width: auto;
+		height: 60px;
 	}
 }
