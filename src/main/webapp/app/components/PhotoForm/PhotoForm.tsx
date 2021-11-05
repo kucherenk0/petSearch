@@ -63,8 +63,8 @@ const PhotoForm: FC = props => {
 		<>
 			<UploadAntd handleSubmit={handleSubmission} />
 			<br />
-			{Boolean(photos.length) && (
-				<div className={'photoListContainer'}>
+			<div className={'photoListContainer'}>
+				{Boolean(photos.length) && (
 					<List
 						itemLayout="horizontal"
 						dataSource={photos}
@@ -74,9 +74,9 @@ const PhotoForm: FC = props => {
 							</List.Item>
 						)}
 					/>
-					{loading && <Spin size={'large'} className={'photoListLoader'} />}
-				</div>
-			)}
+				)}
+				{loading && <Spin size={'large'} className={'photoListLoader'} />}
+			</div>
 		</>
 	);
 };
