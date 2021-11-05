@@ -12,7 +12,7 @@ export const Home = () => {
 
 	return (
 		<Row style={{ justifyContent: 'center', height: '100%' }}>
-			<Col md="10" style={{ marginTop: 50 }}>
+			<Col md="10" style={{ marginTop: 50, marginBottom: 70 }}>
 				<h1>
 					{/* Загляни в папку i18n (home.title  - это путь к тексту)*/}
 					<Translate contentKey="home.title" />
