@@ -60,24 +60,22 @@ const PhotoForm: FC = props => {
 	};
 
 	return (
-		<>
+		<div className={'photoListContainer'}>
 			<UploadAntd handleSubmit={handleSubmission} />
 			<br />
-			<div className={'photoListContainer'}>
-				{Boolean(photos.length) && (
-					<List
-						itemLayout="horizontal"
-						dataSource={photos}
-						renderItem={item => (
-							<List.Item key={item.id}>
-								<PhotoResult {...item} />
-							</List.Item>
-						)}
-					/>
-				)}
-				{loading && <Spin size={'large'} className={'photoListLoader'} />}
-			</div>
-		</>
+			{Boolean(photos.length) && (
+				<List
+					itemLayout="horizontal"
+					dataSource={photos}
+					renderItem={item => (
+						<List.Item key={item.id}>
+							<PhotoResult {...item} />
+						</List.Item>
+					)}
+				/>
+			)}
+			{loading && <Spin size={'large'} className={'photoListLoader'} />}
+		</div>
 	);
 };
 

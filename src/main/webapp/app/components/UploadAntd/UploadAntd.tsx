@@ -47,6 +47,10 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 		setState({ ...state, fileList });
 	};
 
+	const handleClear = () => {
+		setState(initialState);
+	};
+
 	const { previewVisible, previewImage, fileList, previewTitle } = state;
 	const uploadButton = (
 		<div>
@@ -74,13 +78,16 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 			>
 				<img alt="example" style={{ width: '100%' }} src={previewImage} />
 			</Modal>
-			<div style={{ width: 150 }}>
+			<div style={{ width: 300, display: 'flex', flexDirection: 'row' }}>
 				<ButtonAntd
 					color="success"
 					type="primary"
 					onClick={() => handleSubmit(fileList as File[])}
 				>
 					Submit
+				</ButtonAntd>
+				<ButtonAntd color="success" type="primary" onClick={handleClear}>
+					Clear
 				</ButtonAntd>
 			</div>
 		</>
