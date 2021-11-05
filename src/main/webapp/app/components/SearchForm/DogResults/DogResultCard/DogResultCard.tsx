@@ -5,7 +5,7 @@ import './styles.scss';
 import { Map, Placemark, YMaps } from 'react-yandex-maps';
 
 const DogResultCard: FC<TDogResult> = props => {
-	const { dateOfShoot, photoAddress, filePath } = props;
+	const { dateOfShoot, photoAddress, filePath, coords } = props;
 	const isMobile = window.innerWidth < 800;
 
 	function showMap() {
@@ -14,15 +14,17 @@ const DogResultCard: FC<TDogResult> = props => {
 			content: (
 				<div>
 					<p>{photoAddress}</p>
-					<YMaps>
-						<Map
-							defaultState={{ center: [55.75, 37.57], zoom: 10 }}
-							height={isMobile ? window.innerHeight * 0.5 : 400}
-							width={isMobile ? window.innerWidth * 0.8 : 400}
-						>
-							<Placemark geometry={[55.75, 37.61]} />
-						</Map>
-					</YMaps>
+					{Boolean(coords && coords.length === 2) && (
+						<YMaps>
+							<Map
+								defaultState={{ center: coords, zoom: 10 }}
+								height={isMobile ? window.innerHeight * 0.5 : 400}
+								width={isMobile ? window.innerWidth * 0.8 : 400}
+							>
+								<Placemark geometry={coords} />
+							</Map>
+						</YMaps>
+					)}
 				</div>
 			),
 		});

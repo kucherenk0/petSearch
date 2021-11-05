@@ -1,5 +1,6 @@
 export type TDogResult = {
-  filePath: string;
-  dateOfShoot: string;
-  photoAddress: string;
+	filePath: string;
+	dateOfShoot: string;
+	photoAddress: string;
+	coords: number[];
 };

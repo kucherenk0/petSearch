@@ -11,13 +11,19 @@ interface Props {
 }
 
 const Input: FC<Props> = props => {
-	const { multiline, onChange, ...rest } = props;
+	const { multiline, onChange, style, ...rest } = props;
 	return multiline ? (
-		<AInput className={'petSearchInput'} height={50} onChange={onChange} {...rest} />
-	) : (
 		<AInput.TextArea
 			className={'petSearchInput'}
-			rows={4}
+			rows={3}
+			onChange={onChange}
+			{...rest}
+		/>
+	) : (
+		<AInput
+			className={'petSearchInput'}
+			height={50}
+			style={{ height: 50, ...style }}
 			onChange={onChange}
 			{...rest}
 		/>
