@@ -1,0 +1,20 @@
+.containerDog {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-bottom: 50px;
+	@media (max-width: 800px) {
+		& {
+			margin-top: 30px;
+		}
+	}
+}
+
+.loaderContainer {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+}

@@ -1,0 +1,11 @@
+.petSearchCascader {
+	background-color: #fafafa;
+	height: 50px;
+	border-radius: 8px;
+	width: 100%;
+	& > input {
+		height: 50px;
+		width: 100%;
+		border-radius: 8px;
+	}
+}

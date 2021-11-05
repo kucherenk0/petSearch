@@ -1,0 +1,60 @@
+.searchFormMain {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+	margin-top: 40px;
+}
+
+.searchFormSider {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	height: 390px;
+	justify-content: space-between;
+	width: 280px;
+	margin-right: 50px;
+	flex-shrink: 0;
+}
+
+.petSearchButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	background-color: #2c3e50;
+	color: white;
+	border-radius: 25px;
+	width: 100%;
+	font-weight: bold;
+	border: none;
+	height: 50px;
+	&:hover {
+		background-color: #476485;
+		color: white;
+	}
+	&:focus {
+		background-color: #2c3e50;
+		color: white;
+	}
+}
+
+.petSearchDatePicker {
+	border-radius: 8px;
+	background-color: #fafafa;
+	height: 50px;
+	width: 100%;
+	& > input {
+		height: 50px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.searchFormMain {
+		flex-direction: column;
+		align-items: center;
+	}
+	.searchFormSider {
+		width: 100%;
+		margin-right: 0;
+	}
+}
