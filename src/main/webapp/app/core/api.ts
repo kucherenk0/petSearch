@@ -58,6 +58,7 @@ export interface IUploadPhotoResultItem {
 	lon: string;
 	cameraUid: string;
 	date: string;
+	breed?: string;
 }
 
 export interface IUploadPhoto {
