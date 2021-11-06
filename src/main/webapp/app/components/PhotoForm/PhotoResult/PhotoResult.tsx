@@ -97,7 +97,7 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 				{paramItem('Дата', new Date(date).toLocaleString())}
 				{paramItem('Цвет', COLORS[color - 1])}
 				{paramItem('Хвост', TAILS[tail - 1])}
-				{paramItem('Порода', breed)}
+				{breed && paramItem('Порода', breed)}
 			</div>
 		</List.Item>
 	);
