@@ -34,7 +34,7 @@ const DogCarousel: FC = props => {
 		return (
 			<div>
 				<div className={'dogSlideItem'}>
-					<img src={slide.image} />
+					{window.innerWidth > 1400 && <img src={slide.image} />}
 					<div className={'dogSlideText'}>
 						{slide.bigTitle ? (
 							<h1>{slide.bigTitle}</h1>

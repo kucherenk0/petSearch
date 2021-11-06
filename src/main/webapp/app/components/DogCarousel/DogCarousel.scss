@@ -41,7 +41,7 @@
 .dogSlideText {
 	& > h1 {
 		line-height: 11rem;
-		font-size: 7rem;
+		font-size: 7em;
 		font-weight: 800;
 		letter-spacing: -9px;
 	}
@@ -60,7 +60,29 @@
 	}
 }
 
-@media (max-width: 1300px) {
-	.dogSlideItem {
+@media (max-width: 500px) {
+	.dogSlideText {
+		& > h1 {
+			line-height: 75px;
+			font-size: 65px;
+			font-weight: 800;
+			letter-spacing: -4px;
+		}
+		& > h2 {
+			line-height: 50px;
+			font-size: 40px;
+			font-weight: 800;
+			letter-spacing: -2px;
+		}
+		& > .carouselSubtitle {
+			color: white;
+			line-height: 40px;
+			white-space: pre-line;
+			font-size: 30px;
+			font-weight: 400;
+		}
+		@media (max-width: 1000px) {
+			padding: 20px;
+		}
 	}
 }

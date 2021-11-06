@@ -19,8 +19,7 @@
 	height: 430px;
 	justify-content: space-between;
 	width: 280px;
-	margin-right: 25px;
-	padding-right: 25px;
+	margin-right: 50px;
 	flex-shrink: 0;
 }
 
@@ -50,5 +49,14 @@
 	.searchFormSider {
 		width: 100%;
 		margin-right: 0;
+		padding: 0px 20px;
+	}
+
+	.photoFormTitle {
+		& h3 {
+			font-weight: 700;
+			font-size: 30px;
+			padding: 0px 20px;
+		}
 	}
 }

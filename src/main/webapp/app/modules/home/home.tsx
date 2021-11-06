@@ -18,7 +18,7 @@ export const Home = () => {
 				<Col md="10" style={{ marginTop: 50, marginBottom: 70 }}>
 					{
 						// TODO
-						account && account.login ? (
+						!(account && account.login) ? (
 							<>
 								<SearchForm />
 								<br />

@@ -27,3 +27,9 @@
 		background-color: #eeeeee;
 	}
 }
+
+@media (max-width: 1000px) {
+	.photoFormContainer {
+		padding: 20px;
+	}
+}

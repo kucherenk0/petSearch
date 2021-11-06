@@ -16,7 +16,7 @@ const DogResults: FC<IProps> = props => {
 	const [limit, setLimit] = useState(limitElements);
 
 	return (
-		<div>
+		<div className={'containerDog'}>
 			{results.length > 0 ? (
 				<div className={'containerDog'}>
 					{results.slice(0, limit).map((item, i) => (
