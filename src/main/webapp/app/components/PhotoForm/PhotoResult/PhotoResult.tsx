@@ -67,8 +67,8 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 			</div>
 			<div className={'photoResultContainerItem'}>
 				{paramItem('Date', new Date(date).toLocaleString())}
-				{paramItem('Color', COLORS[color])}
-				{paramItem('Tail', TAILS[tail])}
+				{paramItem('Color', COLORS[color - 1])}
+				{paramItem('Tail', TAILS[tail - 1])}
 			</div>
 		</List.Item>
 	);

@@ -55,11 +55,11 @@ export const MOCK_IN_PROGRESS = {
 
 export const optionsTail = [
 	{
-		value: 0,
+		value: 1,
 		label: TAILS[0],
 	},
 	{
-		value: 1,
+		value: 2,
 		label: TAILS[1],
 	},
 ];
@@ -89,15 +89,15 @@ export const types = [
 
 export const optionsColor = [
 	{
-		value: 0,
+		value: 1,
 		label: COLORS[0],
 	},
 	{
-		value: 1,
+		value: 2,
 		label: COLORS[1],
 	},
 	{
-		value: 2,
+		value: 3,
 		label: COLORS[2],
 	},
 ];
