@@ -72,6 +72,9 @@ const SearchForm: FC = props => {
 
 	return (
 		<div>
+			<div className={'photoFormTitle'}>
+				<h3>Поиск по параметрам</h3>
+			</div>
 			{lastDate && <div className={'lastDateBlock'}>{lastDate}</div>}
 			<main className={'searchFormMain'}>
 				<div className={'searchFormSider'}>
