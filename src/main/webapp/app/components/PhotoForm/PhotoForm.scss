@@ -1,11 +1,15 @@
-.photoListContainer {
+.photoFormContainer {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	flex-grow: 0;
-	width: fit-content;
+	width: 100%;
 }
 
-.photoListLoader {
+.photoFormTitle {
+	margin: 40px 0px;
+}
+
+.photoListContainer {
+	width: 100%;
 	margin-top: 20px;
+	flex-direction: row;
 }

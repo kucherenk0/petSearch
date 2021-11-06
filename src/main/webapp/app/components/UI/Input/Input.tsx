@@ -8,6 +8,7 @@ interface Props {
 	placeholder?: string;
 	width?: number;
 	style?: any;
+	value?: any;
 }
 
 const Input: FC<Props> = props => {

@@ -1,14 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Button, Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import './UploadAndt.scss';
 import ButtonAntd from 'app/components/UI/ButtonAntd/ButtonAntd';
 import Spin from 'antd/lib/spin';
 import { message } from 'antd/es';
+import { UploadFile } from 'antd/es/upload/interface';
 
 interface IProps {
-	handleSubmit: (files: File[]) => void;
+	handleSubmit: (files: UploadFile[]) => void;
 	loading?: boolean;
+	_fileList: UploadFile[];
+	setFileList: (a: UploadFile[]) => void;
+	maxPhotos?: number;
 }
 
 function getBase64(file) {
@@ -21,16 +25,17 @@ function getBase64(file) {
 }
 
 export const UploadAntd: FC<IProps> = React.memo(props => {
-	const { handleSubmit, loading } = props;
+	const { handleSubmit, loading, _fileList, setFileList, maxPhotos } = props;
 	const initialState = {
 		previewVisible: false,
 		previewImage: '',
 		previewTitle: '',
-		fileList: [],
 	};
 
 	const [state, setState] = useState(initialState);
 	let timer;
+
+	const handleClearForm = () => setState(initialState);
 
 	const handleCancel = () => setState({ ...state, previewVisible: false });
 	const handlePreview = async file => {
@@ -47,23 +52,23 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 	};
 
 	const handleChangeFile = ({ fileList }) => {
-		setState({ ...state, fileList });
+		setFileList(fileList);
 	};
 
 	const onSubmit = () => {
-		if (fileList.length > 0) {
-			handleSubmit(fileList);
+		if (_fileList.length > 0) {
+			handleSubmit(_fileList);
 		} else {
-			message.warn('You need to download photos', 7);
+			message.warn('Необходимо загрузить фотографии', 7);
 		}
 		// setState(initialState);
 	};
 
-	const { previewVisible, previewImage, fileList, previewTitle } = state;
+	const { previewVisible, previewImage, previewTitle } = state;
 	const uploadButton = (
 		<div>
 			<PlusOutlined />
-			<div style={{ marginTop: 8 }}>Upload</div>
+			<div style={{ marginTop: 8 }}>Загрузить</div>
 		</div>
 	);
 
@@ -73,11 +78,11 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 				<Upload
 					className={'uploadPhotoDog'}
 					listType="picture-card"
-					fileList={fileList}
+					fileList={_fileList}
 					onPreview={handlePreview}
 					onChange={handleChangeFile}
 				>
-					{fileList.length >= 20 ? null : uploadButton}
+					{_fileList.length >= (maxPhotos ?? 20) ? null : uploadButton}
 				</Upload>
 				<Modal
 					visible={previewVisible}
@@ -93,9 +98,9 @@ export const UploadAntd: FC<IProps> = React.memo(props => {
 				type="primary"
 				onClick={onSubmit}
 				disabled={loading}
-				style={{ width: 200 }}
+				style={{ width: 200, marginTop: 20 }}
 			>
-				{loading ? <Spin className={'dogSpin'} /> : 'Submit'}
+				{loading ? <Spin className={'dogSpin'} /> : 'Отправить'}
 			</ButtonAntd>
 		</div>
 	);

@@ -9,11 +9,17 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	height: 390px;
+	height: 430px;
 	justify-content: space-between;
 	width: 280px;
 	margin-right: 50px;
 	flex-shrink: 0;
+}
+
+.lastDateBlock {
+	height: 50px;
+	background-color: #faf4c2;
+	color: #0d5aa7;
 }
 
 .petSearchDatePicker {

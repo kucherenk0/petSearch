@@ -4,6 +4,7 @@ import { Image } from 'antd';
 import './PhotoResult.scss';
 import CheckOutlined from '@ant-design/icons/lib/icons/CheckOutlined';
 import List from 'antd/es/list';
+import { COLORS, TAILS } from 'app/core/constants';
 
 interface IProps {
 	data: IUploadPhotoResultItem[];
@@ -29,7 +30,13 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 		if (typeof value === 'boolean') {
 			if (!value) return null;
 			return (
-				<p>
+				<p
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+					}}
+				>
 					<span className={'photoResultItemTitle'}>{label}: </span>
 					<CheckOutlined />
 				</p>
@@ -49,6 +56,7 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 				<Image src={downloadUrl} />
 			</div>
 			<div className={'photoResultContainerItem'}>
+				{paramItem('ID', id.toString())}
 				{paramItem('Address', address)}
 				{paramItem('Camera Uid', cameraUid)}
 			</div>
@@ -56,6 +64,11 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 				{paramItem('Has dog', hasDog)}
 				{paramItem('Has animal', hasAnimal)}
 				{paramItem('Has owner', hasOwner)}
+			</div>
+			<div className={'photoResultContainerItem'}>
+				{paramItem('Date', new Date(date).toLocaleString())}
+				{paramItem('Color', COLORS[color])}
+				{paramItem('Tail', TAILS[tail])}
 			</div>
 		</List.Item>
 	);

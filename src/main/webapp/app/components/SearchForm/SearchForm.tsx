@@ -1,7 +1,13 @@
-import React, { FC, useState } from 'react';
-import { IDogPhoto, ISearchParams, ISearchResponse, searchByParams } from 'app/core/api';
+import React, { FC, useEffect, useState } from 'react';
+import {
+	getLastDate,
+	IDogPhoto,
+	ISearchParams,
+	ISearchResponse,
+	searchByParams,
+} from 'app/core/api';
 import { Button, DatePicker } from 'antd';
-import { optionsColor, optionsTail } from 'app/components/SearchForm/mock';
+import { optionsColor, optionsTail, types } from 'app/components/SearchForm/mock';
 import { Input, Cascader } from '../UI';
 import './SearchForm.scss';
 import DogResults from './DogResults/SearchDog';
@@ -16,11 +22,25 @@ const SearchForm: FC = props => {
 		dateOfLost: '',
 		tail: 0,
 		color: 0,
-		radius: 0,
+		radius: -1,
 	};
 	const [state, setState] = useState(initialState);
 	const [isLoading, setIsLoading] = useState(false);
 	const [results, setResults] = useState([]);
+	const [lastDate, setLastDate] = useState('');
+	let timer;
+	useEffect(() => {
+		timer = setInterval(() => handleSetLastDate(), 30000);
+		return () => {
+			clearInterval(timer);
+		};
+	}, []);
+
+	const handleSetLastDate = () => {
+		getLastDate()
+			.then(res => setLastDate(res.data))
+			.then(() => console.log(lastDate));
+	};
 
 	const handleSetField = (field: keyof ISearchParams) => value => {
 		console.log(value);
@@ -51,41 +71,59 @@ const SearchForm: FC = props => {
 	};
 
 	return (
-		<main className={'searchFormMain'}>
-			<div className={'searchFormSider'}>
-				<Input
-					multiline
-					placeholder="Адрес потери"
-					onChange={e => handleSetField('address')(e.target.value)}
-					width={100}
-				/>
-				<DatePicker
-					className={'petSearchDatePicker'}
-					showTime={{ format: 'HH:mm' }}
-					format="DD/MM/YYYY-HH:MM:00"
-					onChange={handleChangeDate}
-				/>
-				<Cascader
-					placeholder={'Выберите цвет'}
-					options={optionsColor}
-					onChange={handleSetField('color')}
-				/>
-				<Cascader
-					placeholder={'Выберите хвост'}
-					options={optionsTail}
-					onChange={handleSetField('tail')}
-				/>
-				<ButtonAntd
-					type={'primary'}
-					className={'petSearchButton'}
-					icon={<SearchOutlined />}
-					onClick={handleSearch}
-				>
-					Найти
-				</ButtonAntd>
-			</div>
-			<DogResults isLoading={isLoading} results={results} />
-		</main>
+		<div>
+			{lastDate && <div className={'lastDateBlock'}>{lastDate}</div>}
+			<main className={'searchFormMain'}>
+				<div className={'searchFormSider'}>
+					<Input
+						multiline
+						value={state.address}
+						placeholder="Адрес потери"
+						onChange={e => handleSetField('address')(e.target.value)}
+						width={100}
+					/>
+					<Input
+						placeholder="Радиус"
+						value={state.radius < 0 ? '' : state.radius}
+						onChange={e =>
+							handleSetField('radius')(e.target.value.replace(/\D+/g, ''))
+						}
+						width={100}
+					/>
+					<DatePicker
+						className={'petSearchDatePicker'}
+						showTime={{ format: 'HH:mm' }}
+						format="DD/MM/YYYY-HH:MM:00"
+						onChange={handleChangeDate}
+						placeholder={'Дата пропажи'}
+					/>
+					<Cascader
+						placeholder={'Выберите породу'}
+						options={types.map((item, i) => ({ label: item, value: i }))}
+						onChange={() => {}}
+					/>
+					<Cascader
+						placeholder={'Выберите цвет'}
+						options={optionsColor}
+						onChange={handleSetField('color')}
+					/>
+					<Cascader
+						placeholder={'Выберите хвост'}
+						options={optionsTail}
+						onChange={handleSetField('tail')}
+					/>
+					<ButtonAntd
+						type={'primary'}
+						className={'petSearchButton'}
+						icon={<SearchOutlined />}
+						onClick={handleSearch}
+					>
+						Найти
+					</ButtonAntd>
+				</div>
+				<DogResults isLoading={isLoading} results={results} />
+			</main>
+		</div>
 	);
 };
 

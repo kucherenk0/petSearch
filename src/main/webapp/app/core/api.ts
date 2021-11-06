@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from 'app/core/constants';
 import { message } from 'antd';
+import { UploadFile } from 'antd/es/upload/interface';
 
 export enum DogColors {
 	DEFAULT = 0,
@@ -118,7 +119,7 @@ export const searchById = async (id: number): Promise<IApiResponse<ISearchRespon
 };
 
 export const addPhotoToDB = async (
-	photos: File[]
+	photos: UploadFile[]
 ): Promise<IApiResponse<IUploadPhoto>> => {
 	const formData = new FormData();
 	const prep = photos.map((item: any): File => item.originFileObj ?? item);
@@ -151,6 +152,21 @@ export const loadPhotoById = async (id: number): Promise<IApiResponse<IUploadPho
 	let res, err;
 	try {
 		res = await axios.get(`/api/pictures/upload/${id}`);
+	} catch (e) {
+		console.log('API ERROR', e);
+		message.error(`API ERROR ${e?.message ?? e}`);
+		err = e;
+	}
+	return {
+		data: res?.data,
+		err,
+	};
+};
+
+export const getLastDate = async () => {
+	let res, err;
+	try {
+		res = await axios.get(`api/pictures/earliestDate`);
 	} catch (e) {
 		console.log('API ERROR', e);
 		message.error(`API ERROR ${e?.message ?? e}`);

@@ -7,10 +7,10 @@ import {
 	loadPhotoById,
 } from 'app/core/api';
 import PhotoResult from 'app/components/PhotoForm/PhotoResult/PhotoResult';
-import { List } from 'antd';
 import { Storage } from 'react-jhipster';
-import Spin from 'antd/es/spin';
 import './PhotoForm.scss';
+import { UploadFile } from 'antd/es/upload/interface';
+import { List } from 'react-virtualized';
 
 const INTERVAL = 1000;
 const PHOTO_KEY = 'photosUploaded';
@@ -19,7 +19,7 @@ const PhotoForm: FC = props => {
 	const [error, setError] = useState(null);
 	const [resp, setResp] = useState<IUploadPhoto>(null);
 	const [loading, setLoading] = useState(false);
-
+	const [fileList, setFileList] = useState<UploadFile[]>([]);
 	const initialPhoto = Storage.session.get(PHOTO_KEY);
 	const [photos, setPhotos] = useState<IUploadPhotoResultItem[]>(initialPhoto ?? []);
 	let timer;
@@ -28,6 +28,7 @@ const PhotoForm: FC = props => {
 			timer = setTimeout(() => processPhotosByID(), INTERVAL);
 		} else {
 			setLoading(false);
+			setFileList([]);
 		}
 		return () => {
 			clearTimeout(timer);
@@ -54,9 +55,9 @@ const PhotoForm: FC = props => {
 		}
 	};
 
-	const handleSubmission = (fileList: File[]) => {
+	const handleSubmission = (files: UploadFile[]) => {
 		setLoading(true);
-		addPhotoToDB(fileList).then(res => {
+		addPhotoToDB(files).then(res => {
 			if (res.data) handleSetResData(res.data);
 			if (res.err) {
 				setError(res.err);
@@ -65,19 +66,45 @@ const PhotoForm: FC = props => {
 		});
 	};
 
+	function rowRenderer({
+		key, // Unique key within array of rows
+		index, // Index of row within collection
+		isScrolling, // The List is currently being scrolled
+		isVisible, // This row is visible within the List (eg it is not an overscanned row)
+		style, // Style object to be applied to row (to position it)
+	}) {
+		return (
+			<div key={key} style={style}>
+				<PhotoResult {...photos[index]} />
+			</div>
+		);
+	}
+
 	return (
-		<div className={'photoListContainer'}>
-			<UploadAntd handleSubmit={handleSubmission} loading={loading} />
+		<div className={'photoFormContainer'}>
+			<div className={'photoFormTitle'}>
+				<h3>Загрузка файлов в базу</h3>
+			</div>
+			<UploadAntd
+				handleSubmit={handleSubmission}
+				loading={loading}
+				_fileList={fileList}
+				setFileList={setFileList}
+				maxPhotos={100}
+			/>
 			{Boolean(photos.length) && (
-				<List
-					itemLayout="horizontal"
-					dataSource={photos}
-					renderItem={item => (
-						<List.Item key={item.id}>
-							<PhotoResult {...item} />
-						</List.Item>
-					)}
-				/>
+				// <List
+				// 	rowRenderer={rowRenderer}
+				// 	rowHeight={120}
+				// 	height={400}
+				// 	width={1500}
+				// 	rowCount={photos.length}
+				// />
+				<div className={'photoListContainer'}>
+					{photos.map(item => (
+						<PhotoResult {...item} key={item.id} />
+					))}
+				</div>
 			)}
 		</div>
 	);

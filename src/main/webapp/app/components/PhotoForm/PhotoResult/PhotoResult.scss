@@ -1,25 +1,30 @@
 .photoResultContainer {
+	width: 100%;
 	display: flex;
 	padding: 15px;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 	flex-direction: row;
 	background-color: #fafafa;
 	border-radius: 8px;
-	margin-bottom: 7px;
+	margin-bottom: 20px;
 	box-shadow: 0px 0.850136px 8.50136px rgba(0, 0, 0, 0.07);
 }
 
 .photoResultContainerItem {
-	margin-right: 20px;
-	height: 60px;
+	margin-right: 4%;
 	& .photoResultItemTitle {
 		font-weight: bold;
+		margin-right: 7px;
+	}
+	& p {
+		margin-bottom: 2px;
 	}
 }
 
 .photoResultContainerImg {
-	width: 60px;
+	width: 80px;
+	height: 80px;
 	background-color: #c2c2c2;
 	border-radius: 8px;
 	align-items: center;
@@ -27,8 +32,8 @@
 	flex-direction: column;
 	display: flex;
 	overflow: hidden;
-	& > img {
+	& img {
 		width: auto;
-		height: 60px;
+		height: 78px;
 	}
 }
