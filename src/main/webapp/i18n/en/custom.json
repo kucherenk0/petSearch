@@ -1,0 +1,35 @@
+{
+	"searchForm": {
+		"title": "Search by params",
+		"lastPhotoDate": "Date of uploading last photo to database",
+		"firstPhotoDate": "Date of uploading first photo to database",
+		"subtitle": "",
+		"no dogs": "No dogs found",
+		"address": "Address og lost",
+		"radius": "Radius",
+		"chooseBreed": "Choose breed",
+		"chooseColor": "Choose color",
+		"chooseTail": "Choose tail",
+		"search": "Search"
+	},
+	"uploadForm": {
+		"title": "Upload files to database",
+		"upload": "Upload",
+		"send": "Send",
+		"id": "ID",
+		"cameraUid": "Camera UID",
+		"hasDog": "Dog on photo",
+		"hasAnimal": "Animal on photo",
+		"hasOwner": "Owner on photo",
+		"date": "Date",
+		"color": "Color",
+		"tail": "Tail"
+	},
+	"utils": {
+		"light": "Light",
+		"dark": "Dark",
+		"colored": "Colored",
+		"short": "Short",
+		"long": "Long"
+	}
+}

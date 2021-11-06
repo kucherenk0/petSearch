@@ -11,6 +11,7 @@ import { Storage } from 'react-jhipster';
 import './PhotoForm.scss';
 import { UploadFile } from 'antd/es/upload/interface';
 import { List } from 'react-virtualized';
+import Description from 'app/components/UI/Description/Description';
 
 const INTERVAL = 1000;
 const PHOTO_KEY = 'photosUploaded';
@@ -84,6 +85,17 @@ const PhotoForm: FC = props => {
 		<div className={'photoFormContainer'}>
 			<div className={'photoFormTitle'}>
 				<h3>Загрузка файлов в базу</h3>
+
+				<Description>
+					<p>
+						Lorem Ipsum - это текст-рыба, часто используемый в печати и
+						вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на
+						латинице с начала XVI века. В то время некий безымянный печатник
+						создал большую коллекцию размеров и форм шрифтов, используя Lorem
+						Ipsum для распечатки образцов. Lorem Ipsum не только успешно
+						пережил без заметных изменений пять ве
+					</p>
+				</Description>
 			</div>
 			<UploadAntd
 				handleSubmit={handleSubmission}

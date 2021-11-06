@@ -82,20 +82,20 @@ const PhotoResult: FC<IUploadPhotoResultItem> = props => {
 			</div>
 			<div className={'photoResultContainerItem'}>
 				{paramItem('ID', id.toString())}
-				<div onClick={showMap} style={{ cursor: 'pointer' }}>
-					{paramItem('Address', address)}
+				<div onClick={showMap} className={'resultClickable'}>
+					{paramItem('Адрес', address)}
 				</div>
-				{paramItem('Camera Uid', cameraUid)}
+				{paramItem('UID Камеры', cameraUid)}
 			</div>
 			<div className={'photoResultContainerItem'}>
-				{paramItem('Has dog', hasDog)}
-				{paramItem('Has animal', hasAnimal)}
-				{paramItem('Has owner', hasOwner)}
+				{paramItem('Собака на фото', hasDog)}
+				{paramItem('Животное на фото', hasAnimal)}
+				{paramItem('Хозяин питомца на фото', hasOwner)}
 			</div>
 			<div className={'photoResultContainerItem'}>
-				{paramItem('Date', new Date(date).toLocaleString())}
-				{paramItem('Color', COLORS[color - 1])}
-				{paramItem('Tail', TAILS[tail - 1])}
+				{paramItem('Дата', new Date(date).toLocaleString())}
+				{paramItem('Цвет', COLORS[color - 1])}
+				{paramItem('Хвост', TAILS[tail - 1])}
 			</div>
 		</List.Item>
 	);

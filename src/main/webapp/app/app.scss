@@ -17,6 +17,7 @@ a {
 * {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	font-family: 'Manrope', sans-serif;
 	&:after,
 	&::before {
 		-moz-box-sizing: border-box;
@@ -31,7 +32,7 @@ a {
 		height: calc(100% - 40px);
 		overflow-y: auto;
 		overflow-x: hidden;
-		padding: 1rem;
+		padding: 1rem 0;
 		.card {
 			padding: 1rem;
 		}
@@ -318,4 +319,10 @@ http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
 
 .ant-cascader-menu {
 	height: auto;
+}
+
+.nav-item {
+	& span {
+		margin-left: 5px;
+	}
 }

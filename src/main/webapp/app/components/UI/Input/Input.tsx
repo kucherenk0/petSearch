@@ -23,8 +23,8 @@ const Input: FC<Props> = props => {
 	) : (
 		<AInput
 			className={'petSearchInput'}
-			height={50}
-			style={{ height: 50, ...style }}
+			height={40}
+			style={{ height: 40, ...style }}
 			onChange={onChange}
 			{...rest}
 		/>

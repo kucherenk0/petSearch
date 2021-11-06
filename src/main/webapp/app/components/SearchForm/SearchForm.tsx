@@ -7,14 +7,20 @@ import {
 	searchByParams,
 } from 'app/core/api';
 import { Button, DatePicker } from 'antd';
-import { optionsColor, optionsTail, types } from 'app/components/SearchForm/mock';
+import {
+	MOCK_SUCCES,
+	optionsColor,
+	optionsTail,
+	types,
+} from 'app/components/SearchForm/mock';
 import { Input, Cascader } from '../UI';
 import './SearchForm.scss';
 import DogResults from './DogResults/SearchDog';
-import { MOCK_SUCCES } from './mock';
 import SearchOutlined from '@ant-design/icons/lib/icons/SearchOutlined';
 import { TDogResult } from 'app/components/SearchForm/DogResults/types';
 import ButtonAntd from 'app/components/UI/ButtonAntd/ButtonAntd';
+import { Translate } from 'react-jhipster';
+import Description from 'app/components/UI/Description/Description';
 
 const SearchForm: FC = props => {
 	const initialState: ISearchParams = {
@@ -74,6 +80,16 @@ const SearchForm: FC = props => {
 		<div>
 			<div className={'photoFormTitle'}>
 				<h3>Поиск по параметрам</h3>
+				<Description>
+					<p>
+						Lorem Ipsum - это текст-рыба, часто используемый в печати и
+						вэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов на
+						латинице с начала XVI века. В то время некий безымянный печатник
+						создал большую коллекцию размеров и форм шрифтов, используя Lorem
+						Ipsum для распечатки образцов. Lorem Ipsum не только успешно
+						пережил без заметных изменений пять ве
+					</p>
+				</Description>
 			</div>
 			{lastDate && (
 				<div
@@ -90,7 +106,7 @@ const SearchForm: FC = props => {
 						width={100}
 					/>
 					<Input
-						placeholder="Радиус"
+						placeholder="Радиус км."
 						value={state.radius < 0 ? '' : state.radius}
 						onChange={e =>
 							handleSetField('radius')(e.target.value.replace(/\D+/g, ''))
@@ -128,7 +144,11 @@ const SearchForm: FC = props => {
 						Найти
 					</ButtonAntd>
 				</div>
-				<DogResults isLoading={isLoading} results={results} />
+				<DogResults
+					isLoading={isLoading}
+					results={MOCK_SUCCES.classificationResult}
+					limitElements={2}
+				/>
 			</main>
 		</div>
 	);

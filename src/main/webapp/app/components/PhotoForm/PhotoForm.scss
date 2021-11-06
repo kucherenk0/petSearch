@@ -13,3 +13,17 @@
 	margin-top: 20px;
 	flex-direction: row;
 }
+
+.resultClickable {
+	cursor: pointer;
+	padding: 3px 0px;
+	& > p {
+		text-decoration: underline;
+	}
+	& > p > span {
+		text-decoration: none;
+	}
+	&:hover {
+		background-color: #eeeeee;
+	}
+}

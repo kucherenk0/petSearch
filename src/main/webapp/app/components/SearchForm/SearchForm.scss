@@ -1,3 +1,10 @@
+.photoFormTitle {
+	& h3 {
+		font-weight: 700;
+		font-size: 2.5rem;
+	}
+}
+
 .searchFormMain {
 	display: flex;
 	align-items: flex-start;
@@ -12,7 +19,8 @@
 	height: 430px;
 	justify-content: space-between;
 	width: 280px;
-	margin-right: 50px;
+	margin-right: 25px;
+	padding-right: 25px;
 	flex-shrink: 0;
 }
 
@@ -27,7 +35,7 @@
 .petSearchDatePicker {
 	border-radius: 8px;
 	background-color: #fafafa;
-	height: 50px;
+	height: 40px;
 	width: 100%;
 	& > input {
 		height: 50px;
