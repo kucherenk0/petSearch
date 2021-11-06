@@ -7,21 +7,21 @@ import { Map, Placemark, YMaps } from 'react-yandex-maps';
 const DogResultCard: FC<TDogResult> = props => {
 	const { dateOfShoot, photoAddress, filePath, coords } = props;
 	const isMobile = window.innerWidth < 800;
-	const _coords = coords && coords.reverse();
+	console.log(coords);
 	function showMap() {
 		Modal.success({
 			width: 564,
 			content: (
 				<div>
 					<p>{photoAddress}</p>
-					{Boolean(_coords && _coords.length === 2) && (
+					{Boolean(coords && coords.length === 2) && (
 						<YMaps>
 							<Map
-								defaultState={{ center: _coords, zoom: 10 }}
+								defaultState={{ center: coords, zoom: 10 }}
 								height={isMobile ? window.innerHeight * 0.5 : 400}
 								width={isMobile ? window.innerWidth * 0.8 : 400}
 							>
-								<Placemark geometry={_coords} />
+								<Placemark geometry={coords} />
 							</Map>
 						</YMaps>
 					)}
