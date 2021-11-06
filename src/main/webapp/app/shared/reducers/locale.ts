@@ -6,7 +6,7 @@ import { AppThunk } from 'app/config/store';
 import { TranslatorContext } from 'react-jhipster';
 
 const initialState = {
-	currentLocale: 'ru',
+	currentLocale: '',
 };
 
 export type LocaleState = Readonly<typeof initialState>;
