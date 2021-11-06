@@ -28,7 +28,7 @@ const DogResults: FC<IProps> = props => {
 								setLimit(prev => prev + limitElements);
 							}}
 						>
-							Показать eще {limitElements}
+							Показать eще
 						</ButtonAntd>
 					)}
 				</div>
